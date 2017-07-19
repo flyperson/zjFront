@@ -116,7 +116,8 @@
 			"my_plus/my_project_log.html",
 			"my_plus/my_project_ggpj.html",
 			"my_plus/my_project_zljc_list.html",
-			"my_plus/my_change_list.html"
+			"my_plus/my_change_list.html",
+			"my_plus/my_project_zhcx.html"
 		]
 	},
 	"my_plus/my_project_rzxx.html": {
@@ -684,6 +685,11 @@
 	"leftmenu.html": {
 		"refer": [
 			"setting.html"
+		]
+	},
+	"my_plus/my_project_zhcx.html": {
+		"resources": [
+			"js/chart.js"
 		]
 	}
 }

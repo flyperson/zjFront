@@ -358,7 +358,8 @@
 					"my_plus/my_project_scsl.html",
 					"my_plus/my_project_ggpj.html",
 					"my_plus/my_project_zljc_list.html",
-					"my_plus/my_change_list.html"
+					"my_plus/my_change_list.html",
+					"my_plus/my_project_zhcx.html"
 				],
 				"priority": 0
 			},
@@ -938,6 +939,13 @@
 				"refer": [
 					"setting.html"
 				],
+				"priority": 0
+			},
+			"my_plus/my_project_zhcx.html": {
+				"resources": [
+					"js/chart.js"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
