@@ -1,0 +1,364 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">		
+		<link rel="stylesheet" href="../css/mui.min.css">	
+		<link rel="stylesheet" href="../css/my_css.css">	
+		<style type="text/css">
+			.mui-control-content {				
+				bottom: 0px;	
+			}			
+			/*媒体查询，横屏效果*/
+			@media only screen and (orientation:landscape ) {
+				.mui-control-content {
+					bottom: 0px;
+					}			
+			}
+			html,body {
+				background-color: #efeff4;
+			}			
+			 .oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			
+			.mui-popover {
+				height: 290px;
+			}
+			#zuyPopover{
+				min-width: 282px;				
+				top:15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			#zybjPopover{
+				min-width: 282px;				
+				top:15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}			
+			.mui-popover .mui-popover-arrow{
+				display: none !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav"></a>
+			<a id="my_popover" class="mui-icon mui-icon-bars mui-pull-right"></a>
+			<h1 class="mui-title">我的任务</h1>			
+		</header>
+			<div class="mui-content">
+				<div style="padding: 10px 10px;">
+					<div id="segmentedControl" class="mui-segmented-control">
+						<a id="a1"  class="mui-control-item mui-active" href="#item1">
+							全部(1)
+						</a>
+						<a id="a2" class="mui-control-item " href="#item2">
+							进行中(1)
+						</a>
+						<a id="a3" class="mui-control-item" href="#item3">
+							延期(1)
+						</a>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div id="item1" class="mui-control-content mui-active">
+					<div id="scroll" class="mui-scroll-wrapper">
+						<div id="renwu" class="mui-scroll rwdiv">
+								<!--<ul  class="mui-table-view">
+									<li class="mui-table-view-cell my_backgroundcolor_blue2" >
+										<a class="a_color" href="">
+											<span class="mui-icon mui-icon-info mui-pull-left my_color_white">
+											</span>
+											<p class="mui-ellipsis my_style2">
+												任务名称&nbsp;&nbsp;2017-3-10
+											</p>
+										</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											任务类别
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											部位
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											任务创建人+任务接收人
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											截止日期
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											附件
+										</p>
+									</li>	
+								</ul>-->
+							</div>
+						</div>						
+					</div>
+				<div id="item2" class="mui-control-content mui-active">
+					<div id="scroll" class="mui-scroll-wrapper">
+						<div class="mui-scroll ">
+							<div class="mui-card" >
+								<ul id="renwu" class="mui-table-view">
+									<li class="mui-table-view-cell my_backgroundcolor_blue2" >
+										<a class="a_color" href="team_in_rwhf.html">
+											<span class="mui-icon mui-icon-info mui-pull-left my_color_white">
+											</span>
+											<p class="mui-ellipsis my_style2">
+												任务名称&nbsp;&nbsp;2017-3-10
+											</p>
+										</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											任务类别
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											部位
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											任务创建人+任务接收人
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											截止日期
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											附件
+										</p>
+									</li>	
+								</ul>
+							</div>
+						</div>						
+					</div>
+				</div>
+				<div id="item3" class="mui-control-content mui-active">
+					<div id="scroll" class="mui-scroll-wrapper">
+						<div class="mui-scroll ">
+							<div class="mui-card" >
+								<ul id="renwu" class="mui-table-view">
+									<li class="mui-table-view-cell my_backgroundcolor_blue2" >
+										<a class="a_color" href="team_in_rwhf.html">
+											<span class="mui-icon mui-icon-info mui-pull-left my_color_white">
+											</span>
+											<p class="mui-ellipsis my_style2">
+												任务名称&nbsp;&nbsp;2017-3-10
+											</p>
+										</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											任务类别
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											部位
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											任务创建人+任务接收人
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											截止日期
+										</p>
+									</li>
+									<li class="mui-table-view-cell">
+										<p class="mui-ellipsis my_style1">
+											附件
+										</p>
+									</li>	
+								</ul>
+							</div>
+						</div>						
+					</div>
+				</div>
+			</div>
+		
+	</body>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/service.js" ></script>
+		<script type="text/javascript">
+		
+			mui.init({
+				swipeBack:true, //启用右滑关闭功能
+				gestureConfig:{					
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+					
+					}
+			});
+			//区域滚动,需手动初始化scroll控件
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+			(function($) {
+				$('#scroll').scroll({
+					indicators: true //是否显示滚动条
+				});					
+			})(mui);
+			
+			mui.plusReady(function(){
+				//传值
+				var self = plus.webview.currentWebview();
+				var xmid = self.xmid;
+				var xmmc = self.xmmc;
+				//定位
+				var item=document.getElementsByClassName('mui-control-item');//找到mui-control-item位置
+				var content=document.getElementsByClassName('mui-control-content');//找到位置
+				var a1=document.getElementById('a1');
+				var a2=document.getElementById('a2');
+				var a3=document.getElementById('a3');
+				
+				
+				//动态创建
+				//创建任务列表
+				var createrwlist=function(sjc,rwid,rwmc,rwlb,rwbw,rwcjr,rwjsr,jzrq,rwfj,rwzyx,xxx){
+//					alert(rwbw);
+					var id=rwid;
+					var sjc=sjc;
+					var project=project;
+					var rwmc=rwmc+"&nbsp;&nbsp;"+xxx;
+					var rwlb="任务类别:"+rwlb; 
+					var rwbw="部位："+rwbw;
+					var renyuan="创建人+接收人："+rwcjr+"+"+rwjsr;
+					var jzrq="截止日期："+jzrq;
+					var rwfj="附件："+rwfj;
+					var renwu=document.getElementById("renwu");
+					var ul=document.createElement("ul");
+					
+					
+					//中文解码 防止乱码
+//					var rwmc_c=encodeURI(encodeURI(rwmc));
+//					var rwlb_c=encodeURI(encodeURI(rwlb));
+//					var rwbw_c=encodeURI(encodeURI(rwbw));
+//					var rwcjr_c=encodeURI(encodeURI(rwcjr));
+//					var rwjsr_c=encodeURI(encodeURI(rwjsr));
+//					var jzrq_c=encodeURI(encodeURI(jzrq));
+//					var rwfj_c=encodeURI(encodeURI(rwfj));
+					var color="";
+					if (rwzyx=="重要"){
+						color="my_backgroundcolor_red";
+					}
+					else if(rwzyx=="次重要"){
+						color="my_backgroundcolor_orange";
+					}
+					else if(rwzyx=="一般"){
+						color="my_backgroundcolor_#00BFFF";
+					}
+					else if(rwzyx=="无限时"){
+						color="my_backgroundcolor_green";
+					}
+					else{color="my_backgroundcolor_black";}
+					
+					ul.className="mui-table-view mui-card my_list my_marginbottom10px";
+					ul.innerHTML='<li class="mui-table-view-cell '+color+'" ><a class="a_color" href=""><span class="mui-icon mui-icon-info mui-pull-left my_fontweight my_color_white"></span><p class="mui-ellipsis my_style2">'+rwmc+'</p></a></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">'+rwlb+'</p></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">'+rwbw+'</p></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">'+renyuan+'</p></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">'+jzrq+'</p></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">'+rwfj+'</p></li>';
+					renwu.appendChild(ul);
+				};
+				
+				//任务列表的异步获取数据
+					mui.ajax(url+'my_team/rwu_du.php',{
+						data:{
+							xmid:xmid
+						},
+//						dataType:'json',
+						type:'post',
+						timeout:10000,
+						success:function(data){
+							alert(data);
+							var length=data.length;						
+							if (length>1) {		
+								item[0].firstChild.nodeValue="任务（"+data[length-1].count+"）";
+								for (var i=0;i<length-1;i++) {
+									var rwid=data[i].id;
+									var rwmc=data[i].任务名称;
+									var rwzyx=data[i].任务重要性;
+									var rwlb=data[i].任务类别;
+									var rwcjr=data[i].任务创建人;
+									var rwjsr=data[i].任务接收人;
+									var rwbw=data[i].任务部位;
+									var jzrq=data[i].截止日期;
+									var rwfj=data[i].任务附件;
+									var xxx=data[i].新建日期;
+									var hfzt=data[i].回复状态;
+									var sjc=data[i].时间戳;
+									if (hfzt=="已回复") {
+										rwzyx="已回复";
+									}
+									createrwlist(sjc,rwid,rwmc,rwlb,rwbw,rwcjr,rwjsr,jzrq,rwfj,rwzyx,xxx);
+								}							
+								
+							} else{
+								createrwlist('','---','---','---','---','---','---','---','---','---');							
+							}
+							
+						},
+						error:function(xhr,type,errorThrown){
+							//异常处理；
+							//alert('ajax错误'+type);
+							return callback('ajax错误'+type+errorThrown);
+						}
+					});
+					
+					
+					
+					
+					
+					
+					
+				
+				
+			});
+		</script>
+
+</html>

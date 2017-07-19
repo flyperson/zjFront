@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>中建二局三公司</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/my_css.css">
+		<link rel="stylesheet" href="../css/my_project_fhys_xz.css" />
+		<style type="text/css">
+			#hfms {
+				min-height: 80px;
+				height: auto;
+			}
+			
+			#hfjl {
+				padding: 10px;
+				min-height: 80px;
+				height: auto;
+			}
+			/*块级按钮按钮样式*/
+			
+			.mui-content-padded {
+				margin: 10px;
+			}
+			/*按钮小样式*/
+			
+			.mui-btn-block_my {
+				font-size: 16px;
+				display: block;
+				width: 100%;
+				margin-bottom: 10px;
+				padding: 8px 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a id='oK' class="mui-btn mui-btn-link mui-pull-right mui-btn-blue">完成</a>
+			<h1 class="mui-title">测点分层</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-card">
+				
+				<form id="cdlx" class="mui-input-group" >
+				</form>
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/service.js"></script>
+		<script>
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能
+				gestureConfig: {
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+				}
+			});
+
+			mui.plusReady(function() {
+				//获取上级页面传值
+				var self = plus.webview.currentWebview();
+				var sjc = self.sjc;
+//				var xmid = self.xmid;
+				var gclb = self.gclb;
+				var checkId = self.checkId;
+				
+				var cdlx = document.getElementById("cdlx");
+				var oK = document.getElementById("oK");
+				
+				//创建测点类型
+				var cdlxOne = function() {
+					var cdlx = document.getElementById("cdlx");
+					var oDiv = document.createElement("div");
+					oDiv.className = "mui-input-row mui-radio";
+					oDiv.innerHTML = '<label>' + jcnr+"("+jclb+")"+'</label><input name="radio" type="radio">';
+					cdlx.appendChild(oDiv);
+				}
+
+				//动态获取测点类别
+				mui.ajax(url + 'my_plus/my_ggpj_cdfc.php', {
+					data: {
+						gclb: gclb
+					},
+					dataType: 'json',
+					type: 'post',
+					timeout: 10000,
+					success: function(data) {
+						var length = data.length; //数据返回的形式是数组，在这里先判断数组的长度
+						if(length > 0) {
+							for(var i = 0; i < length - 1; i++) {
+								jcnr = data[i].测点类型;
+								jclb = data[i].测点类别;
+								var jzlb = data[i].建筑类别;
+//								alert(jcnr+"("+jclb+")");
+								cdlxOne();
+							}
+						} else {
+
+						}
+						
+					},
+					error: function(xhr, type, errorThrown) {
+						alert('ajax错误' + type + '---' + errorThrown);
+					}
+				});
+				
+				//获取选中的测点类型
+				function chk() {
+					var obj = cdlx.getElementsByTagName("input");
+					var obj2 = cdlx.getElementsByTagName("label");
+					s = '';
+					for(var i = 0; i < obj.length; i++) {
+						if(obj[i].checked) {
+							s = obj2[i].innerHTML; //如果选中，将value添加到变量s中
+						} else {
+
+						}
+					}
+					if (gclb == "混凝土工程") {
+						if (s == "一次成型(坎台-工艺要求)") {
+							lx = "A";
+						} else if (s == "位置、尺寸(坎台-工艺要求)") {
+							lx = "B";
+						} else if (s == "支模(坎台-工艺要求)") {
+							lx = "C";
+						} else if (s == "砼坎台成型(观感质量)") {
+							lx = "D";
+						} else if (s == "砼柱、墙、板(观感质量)") {
+							lx = "E";
+						} else {
+							
+						} 
+					} else if (gclb == "砌体工程") {
+						if (s == "组砌(工艺要求)") {
+							lx = "A";
+						} else if (s == "顶砖(工艺要求)") {
+							lx = "B";
+						} else if (s == "留槎、拉结筋(工艺要求)") {
+							lx = "C";
+						} else if (s == "二次构件及保护(工艺要求)") {
+							lx = "D";
+						} else if (s == "门窗洞口、施工洞口(工艺要求)") {
+							lx = "E";
+						} else if (s == "砌筑观感(观感质量)") {
+							lx = "F";
+						} else if (s == "二次构件(观感质量)") {
+							lx = "G";
+						} else {
+							
+						} 
+					} else if (gclb == "内墙抹灰工程") {
+						if (s == "单户通长裂缝(严重空鼓、开裂)") {
+							lx = "A";
+						} else if (s == "单户空鼓(严重空鼓、开裂") {
+							lx = "B";
+						} else if (s == "基底、拉毛(工艺要求)") {
+							lx = "C";
+						} else if (s == "加强网(工艺要求)") {
+							lx = "D";
+						} else if (s == "空鼓(观感质量)") {
+							lx = "E";
+						} else if (s == "开裂(观感质量)") {
+							lx = "F";
+						} else if (s == "面层、修补(观感质量)") {
+							lx = "G";
+						} else if (s == "细部外露、收口(观感质量)") {
+							lx = "H";
+						} else {
+							
+						} 
+					} else if (gclb == "外墙防水工程") {
+						if (s == "材料(材料要求)") {
+							lx = "A";
+						} else if (s == "基底、拉毛、挂网(工艺要求)") {
+							lx = "B";
+						} else if (s == "抹灰、防水、保温层(工艺要求)") {
+							lx = "C";
+						} else if (s == "拦河、压顶、外墙线条(工艺要求)") {
+							lx = "D";
+						} else if (s == "分格缝、滴水线(工艺要求)") {
+							lx = "E";
+						} else if (s == "抹灰、防水、保温层(观感质量)") {
+							lx = "F";
+						} else if (s == "檐口、歇山(观感质量)") {
+							lx = "G";
+						} else if (s == "渗漏(观感质量)") {
+							lx = "H";
+						} else {
+							
+						} 
+					} else if (gclb == "门窗工程") {
+						if (s == "洞口尺寸(工艺要求)") {
+							lx = "A";
+						} else if (s == "固定(工艺要求)") {
+							lx = "B";
+						} else if (s == "塞缝(工艺要求)") {
+							lx = "C";
+						} else if (s == "成品保护(工艺要求)") {
+							lx = "D";
+						} else if (s == "渗漏(观感质量)") {
+							lx = "E";
+						} else if (s == "窗边(观感质量)") {
+							lx = "F";
+						} else if (s == "打胶(观感质量)") {
+							lx = "G";
+						} else {
+							
+						} 
+					} else if (gclb == "卫生间、沉箱工程") {
+						if (s == "材料(要求及普遍渗漏)") {
+							lx = "A";
+						} else if (s == "每户渗漏点(要求及普遍渗漏)") {
+							lx = "B";
+						} else if (s == "基底(工艺要求)") {
+							lx = "C";
+						} else if (s == "防水(工艺要求)") {
+							lx = "D";
+						} else if (s == "细部(工艺要求)") {
+							lx = "E";
+						} else if (s == "同层排水(工艺要求)") {
+							lx = "F";
+						} else if (s == "渗漏(观感质量)") {
+							lx = "G";
+						} else if (s == "空鼓开裂(观感质量)") {
+							lx = "H";
+						} else if (s == "降板处理(观感质量)") {
+							lx = "I";
+						} else {
+							
+						} 
+					} else if (gclb == "水电安装工程") {
+						if (s == "套管(工艺要求)") {
+							lx = "A";
+						} else if (s == "给排水(工艺要求)") {
+							lx = "B";
+						} else if (s == "布管布线(工艺要求)") {
+							lx = "C";
+						} else if (s == "空调洞(工艺要求)") {
+							lx = "D";
+						} else if (s == "渗漏(观感质量)") {
+							lx = "E";
+						} else {
+							
+						} 
+					} else if (gclb == "屋面及楼地面工程") {
+						if (s == "材料材料(要求及普遍渗漏)") {
+							lx = "A";
+						} else if (s == "材料屋面防水施工前每户渗漏处(要求及普遍渗漏)") {
+							lx = "B";
+						} else if (s == "变形缝(工艺要求)") {
+							lx = "C";
+						} else if (s == "檐口(工艺要求)") {
+							lx = "D";
+						} else if (s == "排水(工艺要求)") {
+							lx = "E";
+						} else if (s == "防水(工艺要求)") {
+							lx = "F";
+						} else if (s == "渗漏(观感质量)") {
+							lx = "G";
+						} else if (s == "空鼓开裂(观感质量)") {
+							lx = "H";
+						} else {
+					
+						}
+					} else if(gclb == "外墙工程") {
+					
+						if(s == "图案(外墙铺贴)") {
+							lx = "A";
+						} else if(s == "表面(外墙铺贴)") {
+							lx = "B";
+						} else if(s == "收口(外墙铺贴)") {
+							lx = "C";
+						} else if(s == "线条(外墙铺贴)") {
+							lx = "D";
+						} else if(s == "基层(外墙涂料)") {
+							lx = "E";
+						} else if(s == "层数(外墙涂料)") {
+							lx = "F";
+						} else if(s == "表面(外墙涂料)") {
+							lx = "G";
+						} else if(s == "线条(外墙涂料)") {
+							lx = "H";
+						} else if(s == "安装(外墙石材)") {
+							lx = "I";
+						} else if(s == "表面(外墙石材)") {
+							lx = "J";
+						} else if(s == "线条(外墙石材)") {
+							lx = "K";
+						} else if(s == "打胶(外墙石材)") {
+							lx = "L";
+						}
+					} else if(gclb == "天花工程") {
+						if (s == "普遍开裂(普遍开裂)") {
+							lx = "A";
+						} else if (s == "安装(有吊顶天花)") {
+							lx = "B";
+						} else if (s == "表面(有吊顶天花)") {
+							lx = "C";
+						} else if (s == "油漆(有吊顶天花)") {
+							lx = "D";
+						} else if (s == "基层(无吊顶天花)") {
+							lx = "E";
+						} else if (s == "表面(无吊顶天花)") {
+							lx = "F";
+						} else if (s == "油漆(无吊顶天花)") {
+							lx = "G";
+						} else if (s == "安装(线条)") {
+							lx = "H";
+						} else if (s == "拼接(线条)") {
+							lx = "I";
+						} else if (s == "表面(线条)") {
+							lx = "J";
+						} else if (s == "油漆(线条)") {
+							lx = "K";
+						} 
+					} else if (gclb == "墙面工程") {
+						if (s == "单户通长裂缝(普遍空鼓、开裂)") {
+							lx = "A";
+						} else if (s == "单户瓷砖空鼓(普遍空鼓、开裂)") {
+							lx = "B";
+						} else if (s == "基层(涂料工程)") {
+							lx = "C";
+						} else if (s == "层数(涂料工程)") {
+							lx = "D";
+						} else if (s == "表面(涂料工程)") {
+							lx = "E";
+						} else if (s == "油漆(涂料工程)") {
+							lx = "F";
+						} else if (s == "基层(裱糊工程)") {
+							lx = "G";
+						} else if (s == "预埋(裱糊工程)") {
+							lx = "H";
+						} else if (s == "表面(裱糊工程)") {
+							lx = "I";
+						} else if (s == "拼接(裱糊工程)") {
+							lx = "J";
+						} else if (s == "收口(裱糊工程)") {
+							lx = "K";
+						} else if (s == "基层(木饰面)") {
+							lx = "L";
+						} else if (s == "安装(木饰面)") {
+							lx = "M";
+						} else if (s == "表面(木饰面)") {
+							lx = "N";
+						} else if (s == "细部(木饰面)") {
+							lx = "O";
+						} else if (s == "基层(软硬包)") {
+							lx = "P";
+						} else if (s == "安装(软硬包)") {
+							lx = "Q";
+						} else if (s == "表面(软硬包)") {
+							lx = "R";
+						} else if (s == "细部(软硬包)") {
+							lx = "S";
+						} else if (s == "放样(石材、瓷砖铺)") {
+							lx = "T";
+						} else if (s == "挂石(石材、瓷砖铺)") {
+							lx = "U";
+						} else if (s == "排版(石材、瓷砖铺)") {
+							lx = "V";
+						} else if (s == "表面(石材、瓷砖铺)") {
+							lx = "W";
+						} else if (s == "收口(石材、瓷砖铺)") {
+							lx = "X";
+						} else if (s == "安装(玻璃、金)") {
+							lx = "Y";
+						} else if (s == "表面(玻璃、金)") {
+							lx = "Z";
+						} else if (s == "打胶(玻璃、金)") {
+							lx = "$";
+						}
+					} else if (gclb == "地面工程") {
+						if (s == "放样(地砖)") {
+							lx = "A";
+						} else if (s == "细部(地砖)") {
+							lx = "B";
+						} else if (s == "厨房地柜底部(地砖)") {
+							lx = "C";
+						} else if (s == "排版(地砖)") {
+							lx = "D";
+						} else if (s == "表面(地砖)") {
+							lx = "E";
+						} else if (s == "收口(地砖)") {
+							lx = "F";
+						} else if (s == "细部(木地板)") {
+							lx = "G";
+						} else if (s == "排版(木地板)") {
+							lx = "H";
+						} else if (s == "表面(木地板)") {
+							lx = "I";
+						} else if (s == "放样(石材)") {
+							lx = "J";
+						} else if (s == "细部(石材)") {
+							lx = "K";
+						} else if (s == "排版(石材)") {
+							lx = "L";
+						} else if (s == "表面(石材)") {
+							lx = "M";
+						} else if (s == "收口(石材)") {
+							lx = "N";
+						} else if (s == "安装(踢脚线)") {
+							lx = "O";
+						} else if (s == "表面(踢脚线") {
+							lx = "P";
+						} else if (s == "细部(踢脚线") {
+							lx = "Q";
+						} else if (s == "打胶(踢脚线") {
+							lx = "R";
+						} else if (s == "铺贴(门槛石)") {
+							lx = "S";
+						} else if (s == "标高(门槛石)") {
+							lx = "T";
+						} else if (s == "表面(门槛石)") {
+							lx = "U";
+						}	
+					} else if (gclb == "厨房") {
+						if (s == "背板(橱柜)") {
+							lx = "A";
+						} else if (s == "安装(橱柜)") {
+							lx = "B";
+						} else if (s == "表面(橱柜)") {
+							lx = "C";
+						} else if (s == "台面(橱柜)") {
+							lx = "D";
+						} else if (s == "间距(橱柜)") {
+							lx = "E";
+						} else if (s == "细部(橱柜)") {
+							lx = "F";
+						} else if (s == "安装(电器)") {
+							lx = "G";
+						} else if (s == "嵌入式电器(电器)") {
+							lx = "H";
+						} else if (s == "嵌入式灶台(电器)") {
+							lx = "I";
+						} else if (s == "抽油烟机(电器)") {
+							lx = "J";
+						} else if (s == "嵌入式冰箱(电器)") {
+							lx = "K";
+						} else if (s == "给、排水管(给、排水)") {
+							lx = "L";
+						} else if (s == "龙头(给、排水)") {
+							lx = "M";
+						} else if (s == "洗菜盆(给、排水)") {
+							lx = "N";
+						} 
+					} else if (gclb == "卫生间、阳露台") {
+						if (s == "给、排水管(马桶、浴缸、尿斗") {
+							lx = "A";
+						} else if (s == "马桶(马桶、浴缸、尿斗") {
+							lx = "B";
+						} else if (s == "嵌入式浴缸(马桶、浴缸、尿斗") {
+							lx = "C";
+						} else if (s == "尿斗(马桶、浴缸、尿斗") {
+							lx = "D";
+						} else if (s == "背板(浴室镜、柜)") {
+							lx = "E";
+						} else if (s == "安装(浴室镜、柜)") {
+							lx = "F";
+						} else if (s == "表面(浴室镜、柜)") {
+							lx = "G";
+						} else if (s == "收口(浴室镜、柜)") {
+							lx = "H";
+						} else if (s == "柜体(浴室镜、柜)") {
+							lx = "I";
+						} else if (s == "五金(浴室镜、柜)") {
+							lx = "J";
+						} else if (s == "水件(浴室镜、柜)") {
+							lx = "K";
+						} else if (s == "安装(淋浴屏风)") {
+							lx = "L";
+						} else if (s == "表面(淋浴屏风)") {
+							lx = "M";
+						} else if (s == "打胶(淋浴屏风)") {
+							lx = "N";
+						} else if (s == "五金件(淋浴屏风)") {
+							lx = "O";
+						} else if (s == "标高(地洞)") {
+							lx = "P";
+						} else if (s == "水封(地洞") {
+							lx = "Q";
+						} else if (s == "细部(地洞") {
+							lx = "R";
+						} else if (s == "安装(龙头、花洒、五金件)") {
+							lx = "S";
+						} else if (s == "细部(龙头、花洒、五金件)") {
+							lx = "T";
+						} else if (s == "坡度、水封(给、排水)") {
+							lx = "U";
+						} else if (s == "固定(给、排水)") {
+							lx = "V";
+						} else if (s == "细部(给、排水)") {
+							lx = "W";
+						}else {
+							
+						}
+					}else if (gclb == "电气工程") {
+						if (s == "孔洞(空调)") {
+							lx = "A";
+						} else if (s == "中央空调(空调)") {
+							lx = "B";
+						} else if (s == "分立式空调(空调)") {
+							lx = "C";
+						} else if (s == "箱内(电箱、排气扇、开关、插座)") {
+							lx = "D";
+						}else if (s == "配电箱、排气扇(电箱、排气扇、开关、插座)") {
+							lx = "E";
+						} else if (s == "开关、插座(电箱、排气扇、开关、插座)") {
+							lx = "B";
+						} else if (s == "门扇离地缝隙(灯具)") {
+							lx = "F";
+						}  else if (s == "安装平正(灯具)") {
+							lx = "G";
+						} else {
+							
+						} 
+					}else if (gclb == "门窗细部工程") {
+						if (s == "安装(木门)") {
+							lx = "A";
+						} else if (s == "门(木门)") {
+							lx = "B";
+						} else if (s == "五金件(木门)") {
+							lx = "C";
+						} else if (s == "保护膜(铝合金、塑钢门、窗)") {
+							lx = "D";
+						} else if (s == "排水孔(铝合金、塑钢门、窗)") {
+							lx = "E";
+						} else if (s == "打胶(铝合金、塑钢门、窗)") {
+							lx = "F";
+						} else if (s == "门扇离地缝隙(铝合金、塑钢门、窗)") {
+							lx = "G";
+						}  else if (s == "安装平正(铝合金、塑钢门、窗)") {
+							lx = "H";
+						} else {
+								
+						} 
+					}else if (gclb == "栏杆、楼梯扶手") {
+						if (s == "铁艺(铁艺)") {
+							lx = "A";
+						} else if (s == "观感(观感)") {
+							lx = "B";
+						}  else {
+							
+						} 
+					}else if (gclb == "电梯前室、首层大堂") {
+						if ( s == "工艺(天花)") {
+							lx = "A";
+						} else if (s == "观感(天花)") {
+							lx = "B";
+						} else if ( s == "工艺(墙面)") {
+							lx = "C";
+						} else if (s == "观感(墙面)") {
+							lx = "D";
+						} else if ( s == "工艺(地面)") {
+							lx = "E";
+						} else if (s == "观感(地面)") {
+							lx = "F";
+						}
+					}
+				};
+				//完成按钮监听
+				oK.addEventListener('tap', function() {
+					chk();
+					var target = plus.webview.currentWebview().opener();
+					mui.fire(target, 'cdlx', {
+						flag: lx,
+						
+					});
+					mui.back();
+				});
+			});
+		</script>
+	</body>
+
+</html>

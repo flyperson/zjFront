@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>实测实量</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/iconfont.css">
+		<link rel="stylesheet" href="../css/my_css.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<style>
+			.mui-control-content {				
+				bottom: 0px;	
+			}			
+			/*媒体查询，横屏效果*/
+			@media only screen and (orientation:landscape ) {
+				.mui-control-content {
+					bottom: 0px;
+					}			
+			}
+			html,body {
+				background-color: #efeff4;
+			}			
+			 .oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			
+			.mui-popover {
+				height: 290px;
+			}
+			#zuyPopover{
+				min-width: 282px;				
+				top:15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			#zybjPopover{
+				min-width: 282px;				
+				top:15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}			
+			.mui-popover .mui-popover-arrow{
+				display: none !important;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">加载中...</h1>
+		</header>
+		<div class="mui-content">
+			<div style="padding: 10px 10px;">
+				<div id="segmentedControl" class="mui-segmented-control">
+					<a class="mui-control-item mui-active" href="#item1">
+				建筑工程
+			</a>
+					<a class="mui-control-item" href="#item2">
+				装饰工程
+			</a>
+					
+				</div>
+			</div>
+			<div>
+				<div id="item1" class="mui-control-content mui-active">
+					<div class="mui-content">
+				        <ul id="ul1" class="mui-table-view mui-grid-view mui-grid-9 my_list">
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="">
+				                    <span class="mui-icon iconfont icon-hunningtubeng"></span>
+				                    <div class="mui-media-body" value='混凝土工程'>混凝土工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="">
+				                    <span class="mui-icon iconfont icon-gongcheng1"></span>
+				                    <div class="mui-media-body" >砌体工程</div>
+				            	</a>
+				            </li> 
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="">
+				                    <span class="mui-icon iconfont icon-qiangmian "></span>
+				                    <div class="mui-media-body">内墙抹灰工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont icon-qiangmian " ></span>
+				                    <div class="mui-media-body" >外墙防水工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont  icon-pinzhuan " ></span>
+				                    <div class="mui-media-body" >门窗工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont  icon-gongchengxinxi " ></span>
+				                    <div class="mui-media-body" >卫生间、沉箱工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont icon-gongcheng " ></span>
+				                    <div class="mui-media-body" >水电安装工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont icon-diban  " ></span>
+				                    <div class="mui-media-body" >屋面及楼地面工程</div>
+				            	</a>
+				            </li>
+				        </ul> 
+					</div>
+				</div>
+				<div id="item2" class="mui-control-content">
+					<div class="mui-content">
+				        <ul class="mui-table-view mui-grid-view mui-grid-9 my_list">
+				           	<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="">
+				                    <span class="mui-icon iconfont icon-qiangmian "></span>
+				                    <div class="mui-media-body">外墙工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont icon-qiangmian " ></span>
+				                    <div class="mui-media-body" >天花工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont  icon-qiangmian " ></span>
+				                    <div class="mui-media-body" >墙面工程</div>
+				            	</a>
+				            </li>
+				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont icon-diban  " ></span>
+				                    <div class="mui-media-body" >地面工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont  icon-gongchengxinxi " ></span>
+				                    <div class="mui-media-body" >厨房</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="">
+				                    <span class="mui-icon iconfont icon-pinzhuan"></span>
+				                    <div class="mui-media-body">卫生间、阳露台</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont icon-gongcheng " ></span>
+				                    <div class="mui-media-body" >电气工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="">
+				                    <span class="mui-icon iconfont icon-pinzhuan"></span>
+				                    <div class="mui-media-body">门窗细部工程</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                    <span class="mui-icon iconfont icon-diban  " ></span>
+				                    <div class="mui-media-body" >栏杆、楼梯扶手</div>
+				            	</a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<a href="" >
+				                   <span class="mui-icon iconfont icon-dianti-copy "></span>
+				                    <div class="mui-media-body">电梯前室、首层大堂</div>
+				            	</a>
+				            </li>
+				        </ul> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/service.js" ></script>
+		<script>
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			(function($) {
+				$('#scroll').scroll({
+					indicators: true //是否显示滚动条
+				});
+				var segmentedControl = document.getElementById('segmentedControl');
+				$('.mui-input-group').on('change', 'input', function() {
+					if (this.checked) {
+						var styleEl = document.querySelector('input[name="style"]:checked');
+						var colorEl = document.querySelector('input[name="color"]:checked');
+						if (styleEl && colorEl) {
+							var style = styleEl.value;
+							var color = colorEl.value;
+							segmentedControl.className = 'mui-segmented-control' + (style ? (' mui-segmented-control-' + style) : '') + ' mui-segmented-control-' + color;
+						}
+					}
+				});
+			})(mui);
+			
+			mui.plusReady(function() {
+				//获取url参数值
+				function geturl(name){
+					var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+					var r = window.location.search.substr(1).match(reg);
+					if(r!=null)return  unescape(r[2]);
+					return null;
+				}
+				
+				//获取传值
+				var self = plus.webview.currentWebview();
+				var gcmc = self.gcmc; 
+				var gcid = self.gcid;
+				var sjc = self.sjc;
+				var checkId = self.checkId;
+//				alert(checkId);
+//				alert(sjc);
+//				alert(gcid);
+				//定位样式
+				var my_list = document.getElementsByClassName('my_list');
+				//动态改变标题
+				var h1 = document.getElementsByTagName("h1");
+				h1[0].firstChild.nodeValue = gcmc;
+				//创建href，并把gclb传到下一个页面
+				var a = document.getElementsByTagName("a");
+				var oUl = document.getElementById("ul1");
+				var oLi = document.getElementsByTagName("li");
+				for(var i=3,j=a.length;i<j;i++){
+
+					var oDiv = oLi[i-3].getElementsByTagName("div");
+					var Name = oDiv[0].innerHTML;
+					var Name=encodeURI(encodeURI(Name)); 
+					var gcmc=encodeURI(encodeURI(gcmc));
+					a[i].setAttribute("href","my_project_scsl_ggpj.html?gclb="+Name+"&checkId="+checkId+"&gcmc="+gcmc+"&gcid="+gcid+"&sjc="+sjc+"");
+//					alert(Name);
+				};
+			});
+		</script>
+
+	</body>
+
+</html>

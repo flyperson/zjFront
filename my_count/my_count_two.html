@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>同欣易送检</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/my_css.css">
+		<style type="text/css">
+			.mui-control-content {
+				bottom: 0px;
+			}
+			/*媒体查询，横屏效果*/
+			
+			@media only screen and (orientation:landscape) {
+				.mui-control-content {
+					bottom: 0px;
+				}
+			}
+			
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+			
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			
+			.oa-contact-content {
+				width: 100%;
+			}
+			
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			
+			.oa-contact-name,
+			oa-contact-position {
+				float: left;
+			}
+			
+			.mui-popover {
+				height: 290px;
+			}
+			
+			#zuyPopover {
+				min-width: 282px;
+				top: 15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			#zybjPopover {
+				min-width: 282px;
+				top: 15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			.mui-popover .mui-popover-arrow {
+				display: none !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">xxx</h1>
+		</header>
+		<div class="mui-content">
+
+			<div>
+
+				<div id="item1" class="mui-control-content mui-active" style="margin: 10px;">
+					<div id="scroll" class="mui-scroll-wrapper">
+						<div id="xxx" class="mui-scroll rwdiv">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/immersed.js"></script>
+	<script src="../js/service.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+			gestureConfig: {
+				doubletap: true, //默认为false
+				longtap: true, //默认为false
+
+			}
+		});
+		//区域滚动,需手动初始化scroll控件
+		mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+		(function($) {
+			$('#scroll').scroll({
+				indicators: true //是否显示滚动条
+			});
+		})(mui);
+
+		//获取url参数值
+		function geturl(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) return unescape(r[2]);
+			return null;
+		}
+
+		mui.plusReady(function() {
+			//接收上一个页面传递的值
+			var self = plus.webview.currentWebview();
+			var gclb = self.gclb;
+			//				alert(gclb);
+			//标题
+			var h1 = document.getElementsByTagName('h1');
+			h1[0].firstChild.nodeValue = gclb;
+
+			//创建内容列表
+			var createxxxlist = function(jcnr, ppbz, hgl) {
+				var cdlb = cdlb;
+				var cdscz = cdscz;
+				var jcnr = "检查内容：" + jcnr;
+				var ppbz = "评判标准：" + ppbz;
+				var hgl1 = "合格率:" + hgl;
+				var xxx = document.getElementById("xxx");
+				var ul = document.createElement("ul");
+				ul.className = "mui-table-view mui-card my_list my_marginbottom10px";
+				ul.innerHTML = '<li class="mui-table-view-cell my_backgroundcolor_blue2 "><span class="mui-icon mui-icon-info mui-pull-left my_fontweight my_color_white"></span><p class="mui-ellipsis my_style2">' + jcnr + '</p></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">' + ppbz + '</p></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">' + hgl1 + '</p></li>';
+				xxx.appendChild(ul);
+			};
+			var createggpjlist = function(cdlx1, hgl2) {
+				var cdlx = "测点类型：" + cdlx1;
+				var hgl1 = "合格率:" + hgl2;
+				var xxx = document.getElementById("xxx");
+				var ul = document.createElement("ul");
+				ul.className = "mui-table-view mui-card my_list my_marginbottom10px";
+				ul.innerHTML = '<li class="mui-table-view-cell my_backgroundcolor_blue2 "><span class="mui-icon mui-icon-info mui-pull-left my_fontweight my_color_white"></span><p class="mui-ellipsis my_style2">' + cdlx + '</p></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">' + hgl1 + '</p></li>';
+				xxx.appendChild(ul);
+			};
+
+			//获取实测实量检查内容类型
+			mui.ajax(url + 'my_count/my_count_getType.php', {
+				data: {
+					gclb: gclb
+				},
+				dataType: 'json',
+				type: 'post',
+				timeout: 10000,
+				success: function(data) {
+					var length = data.length;
+					var jcnrAry = new Array();
+					for(i = 0; i < length - 1; i++) {
+						var jcnrA = data[i].检查内容;
+						jcnrAry.unshift(jcnrA);
+					}
+					//					alert(jcnrAry);
+					getTypeFuction(jcnrAry);
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					//alert('ajax错误'+type);
+					return callback('ajax错误' + type + errorThrown);
+				}
+			});
+			//			alert(jcnrAry);
+
+			//获取测点实测值 
+			var getTypeFuction = function(jcnrAry) {
+				var length = jcnrAry.length;
+				for(i = 0; i < length; i++) {
+					var jcnr = jcnrAry[i];
+					mui.ajax(url + 'my_count/my_count_gcqd.php', {
+						data: {
+							gclb: gclb,
+							jcnr: jcnr
+						},
+						dataType: 'json',
+						type: 'post',
+						timeout: 10000,
+						success: function(data) {
+							var a = 0;
+							var b = 0;
+							try {
+								if(data[0].检查内容 == '截面尺寸') {
+									var lengthdata = data.length;
+									for(i = 10; i < lengthdata - 11; i++) {
+										//ppbz = data[0].评判标准;
+										var cdscz = data[i].测点实测值;
+										if(cdscz >= -5 && cdscz <= 8) {
+											a = a + 1;
+										} else {
+											b = b + 1;
+										}
+									}
+									var c = a + b;
+									var hgl = a / c.toFixed(2) * 100 + '%';
+//																	alert(hgl);
+									createxxxlist("截面尺寸", "-5*8", hgl);
+								}
+							} catch(e) {
+
+							}
+
+							var hgl = data.c;
+							var ppbz = data.ppbz;
+							var count = data.count;
+							var jcnr = data.jcnr;
+							if(count > 0) {
+								createxxxlist(jcnr, ppbz, hgl);
+							}
+
+						},
+
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							//alert('ajax错误'+type);
+							return callback('ajax错误' + type + errorThrown);
+						}
+					});
+				}
+			};
+
+			//获取观感评价
+			var zmArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+			for(i = 0; i < zmArray.length; i++) {
+				var zm = zmArray[i];
+				mui.ajax(url + 'my_count/my_ggpj_one.php', {
+					data: {
+						gclb: gclb,
+						zm: zm
+					},
+					dataType: 'json',
+					type: 'post',
+					timeout: 10000,
+					success: function(data) {
+						var t = data.t;
+						var f = data.f;
+						var cdlx1 = data.cdType;
+						var count = data.count;
+						var word = data.zm;
+						var c = ((t / count) * 100).toFixed(2) + '%';
+						var hgl2 = c;
+						if(count > 0) {
+							createggpjlist(cdlx1, hgl2);
+						}
+						//					
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						//alert('ajax错误'+type);
+						return callback('ajax错误' + type + errorThrown);
+					}
+
+					//				
+				});
+			}
+		});
+	</script>

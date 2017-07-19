@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>实测实量</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/my_css.css">
+
+	</head>
+
+	<body>
+		<div class="mui-content">
+
+			<ul id="yiqi" class="mui-table-view mui-table-view-chevron my_list">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" open-type="common" href="my_plus/my_project_list.html">
+						<img class="mui-media-object mui-pull-left" src="images/wdgc.png">
+						<div class="mui-media-body">
+							我的工程
+							<p id='www' class='mui-ellipsis'>0个项目</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right' open-type="common" href="my_log/daily_record.html">
+						<img class="mui-media-object mui-pull-left" src="images/zjsj.png">
+						<div class="mui-media-body">
+							日志信息
+							<p class='mui-ellipsis'>本周有0项日志信息卡片</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="my_count/my_count_one.html">
+						<img class="mui-media-object mui-pull-left" src="images/wdrw.png">
+						<div class="mui-media-body">
+							质量统计
+							<p class='mui-ellipsis'>各项目班组通病统计分析</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="my_document/my_document.html">
+						<img class="mui-media-object mui-pull-left" src="images/hd.png">
+						<div class="mui-media-body">
+							工程文档
+							<p class='mui-ellipsis'>本周更新了2份工程文档</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+			<div class="title">
+
+			</div>
+		</div>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron my_list">
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right'>
+						<img class="mui-media-object mui-pull-left" src="images/xx.png">
+						<div class="mui-media-body">
+							消息
+							<p class='mui-ellipsis'>你有1条消息</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" src="images/gdsz.png">
+						<div class="mui-media-body">
+							更多设置
+							<p class='mui-ellipsis'>消息推送，常见问题等</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/my_js_nextpage.js"></script>
+	<script src="js/service.js"></script>
+	<script>
+		mui.init();
+		//获取传值
+		mui.plusReady(function() {
+			//获取传值
+			var self = plus.webview.currentWebview();
+			//全局变量mobile
+			mobile = self.mobile;
+			userid1 = self.userid;
+			bumen1 = self.bumen;
+//			alert(mobile);
+			var p = document.getElementsByTagName('p');
+			var span=document.getElementsByTagName('span');
+			
+			mui('#yiqi').on('tap', 'a', function() {
+				//alert("测试");
+				var id = this.getAttribute('href');
+				var href = this.href;
+				var webview_style = {
+					popGesture: "close",					
+					hardwareAccelerated:false
+				};
+				mui.openWindow({
+					id: id,
+					url: this.href,
+					styles: webview_style,
+					extras:{
+						mobile:mobile,
+						userid:userid1,
+						bumen:bumen1
+					},
+					show: {
+						aniShow:"pop-in"
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			});
+			
+//			var today = new Date();
+//			//today.setDate(today.getDate()-1);
+//			var year = today.getFullYear();
+//			var month = today.getMonth() + 1;
+//			var day = today.getDate();
+//			if(month < 10) {
+//				month = '0' + month;
+//			}
+//			if(day < 10) {
+//				day = '0' + day;
+//			}
+//			var todaydate = year + '-' + month + '-' + day;
+
+			//获取我的工程的数量
+			mui.ajax(url+'my.php',{
+				data:{
+					
+				},
+				dataType: 'json',
+				type:'post',
+				timeout:10000,
+				success:function(data){
+					if (data) {
+						var count=data.count;	//本号码的工程项目个数						
+						p[0].firstChild.nodeValue=count+" 个项目";
+					} else{
+						
+					}
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					//alert('ajax错误'+type);
+				}
+			});
+			//获取我的日志的数量
+			mui.ajax(url+'my_log.php',{
+				data:{
+					
+				},
+				dataType: 'json',
+				type:'post',
+				timeout:10000,
+				success:function(data){
+					if (data) {
+						var count=data.count;	//本号码的工程项目个数						
+						p[1].firstChild.nodeValue="本周有"+count+"项日志信息卡片";
+					} else{
+						
+					}
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					//alert('ajax错误'+type);
+				}
+			});
+
+		});
+	</script>
+
+</html>

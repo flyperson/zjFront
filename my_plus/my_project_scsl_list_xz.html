@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>实测实量系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/my_css.css">
+		<link rel="stylesheet" href="../css/my_project_scsl_list_xz.css">
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">新建</h1>
+		</header>
+		<div class="mui-content">
+			<div id="myform" class="">
+				<div class="mui-content-padded" style="margin: 10px;">
+					<form class="mui-input-group">
+						<div class="mui-input-row">
+							<label>名称：</label>
+							<input id="mc" type="text" class="mui-input-clear" placeholder="名称">
+						</div>
+						<div class="mui-input-row">
+							<label>检查部位：</label>
+							<input id="jcbw" class="mui-input-clear" type="text" placeholder="检查部位">
+						</div>
+						<div class="mui-input-row">
+							<label>检查日期：</label>
+							<input id="jcrq" class="mui-input-clear" type="text" placeholder="检查日期">
+						</div>
+						<div class="mui-input-row">
+							<label>检查人员：</label>
+							<input id="jcry" class="mui-input-clear" type="text" placeholder="检查人员">
+						</div>
+					</form>
+					<form class="mui-input-group" style="top: 5px;">
+						<div class="mui-input-row">
+							<label>施工班组：</label>
+							<input id="sgbz" type="text" class="mui-input-clear" placeholder="施工班组">
+						</div>
+						<div class="mui-input-row">
+							<label>组长姓名：</label>
+							<input id="zzxm" type="text" class="mui-input-clear" placeholder="组长姓名">
+						</div>
+						<div class="mui-input-row">
+							<label>联系电话：</label>
+							<input id="lxdh" type="text" class="mui-input-clear" placeholder="联系电话">
+						</div>
+						<div class="mui-input-row">
+							<label>施工日期：</label>
+							<input id="sgrq" type="text" class="mui-input-clear" placeholder="施工日期">
+						</div>
+					</form>
+					<form class="mui-input-group" style="top: 10px;">
+						<div class="mui-input-row" style="">
+							<label>工作描述：</label>
+							<input id="gzms" type="text" class="mui-input-clear" placeholder="工作描述">
+						</div>
+					</form>
+
+				</div>
+				<div class="mui-button-row">
+					<button type="button" class="mui-btn mui-btn-primary mui-action-back" style="right: 10%; ">关闭</button>
+					<button id="save" type="button" class="mui-btn mui-btn-primary" style="left: 10%;">保存</button>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/service.js"></script>
+		<!--<script src="../js/my_js_scsl_xz.js" ></script>-->
+		<script>
+			mui.plusReady(function() {
+				//接受上一个页面传值
+				var self = plus.webview.currentWebview();
+				var gcid = self.gcid;
+				var gcmc = self.gcmc;
+				var gclb = self.gclb;
+				//获取表单元素的ID
+				var mc = document.getElementById("mc"); //名称
+				var jcbw = document.getElementById("jcbw"); //检查部位
+				var jcrq = document.getElementById("jcrq"); //检查日期
+				var jcry = document.getElementById("jcry"); //检查人员
+
+				var sgbz = document.getElementById("sgbz"); //施工班组
+				var zzxm = document.getElementById("zzxm"); //组长姓名
+				var lxdh = document.getElementById("lxdh"); //联系电话
+				var sgrq = document.getElementById("sgrq"); //施工日期
+
+				var gzms = document.getElementById("gzms"); //工作描述
+
+				var save = document.getElementById("save"); //保存
+
+				//监听检查日期打开原生日期
+				jcrq.addEventListener('tap', function() {
+					var dDate = new Date();
+					plus.nativeUI.pickDate(function(e) {
+						var d = e.date;
+						jcrq.value = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+					}, function(e) {
+						//alert(e);
+					}, {
+						title: "请选择日期",
+					});
+				});
+
+				//监听施工日期打开原生日期
+				sgrq.addEventListener('tap', function() {
+					var dDate = new Date();
+					plus.nativeUI.pickDate(function(e) {
+						var d = e.date;
+						sgrq.value = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+					}, function(e) {
+						//alert(e);
+					}, {
+						title: "请选择日期",
+					});
+				});
+
+				//自动添加当前时间戳,作为这个新建任务的唯一标识存到数据库，附件上传时会用到
+				var myDate = new Date();
+				var mytime = myDate.getTime();
+				//				alert(myDate);
+				//保存按钮的监听
+				save.addEventListener('tap', function() {
+					var mydata = {
+						sjc: mytime,
+						gcid: gcid,
+						gcmc: gcmc,
+						gclb: gclb,
+						mc: mc.value,
+						jcbw: jcbw.value,
+						jcrq: jcrq.value,
+						jcry: jcry.value,
+						sgbz: sgbz.value,
+						zzxm: zzxm.value,
+						lxdh: lxdh.value,
+						sgrq: sgrq.value,
+						gzms: gzms.value
+					};
+					//执行ajaxform函数
+					ajaxform(mydata, function(err) {
+						if(err) {
+							plus.nativeUI.toast(err);
+							return;
+						}
+						plus.nativeUI.toast('保存成功');
+						//新建之后返回
+						var target = plus.webview.getWebviewById('my_project_scsl_list.html');
+						mui.fire(target, 'json', {
+							flag: ''
+						});
+						mui.back();
+					});
+				});
+				//信息的存储
+				var ajaxform = function(mydata, callback) {
+					callback = callback || $.noop;
+					mydata = mydata || {};
+					mydata.sjc = mydata.sjc || '';
+					mydata.gcid = mydata.gcid || '';
+					mydata.gcmc = mydata.gcmc || '';
+					mydata.gclb = mydata.gclb || '';
+					mydata.mc = mydata.mc || '';
+					mydata.jcbw = mydata.jcbw || '';
+					mydata.jcrq = mydata.jcrq || '';
+					mydata.jcry = mydata.jcry || '';
+					mydata.sgbz = mydata.sgbz || '';
+					mydata.zzxm = mydata.zzxm || '';
+					mydata.lxdh = mydata.lxdh || '';
+					mydata.sgrq = mydata.sgrq || '';
+					mydata.gzms = mydata.gzms || '';
+					if(mydata.mc.length < 1) {
+						return callback('名称不能为空！');
+					}
+					if(mydata.jcbw.length < 1) {
+						return callback('检查部位不能为空！');
+					}
+					if(mydata.jcry.length < 1) {
+						return callback('检查人员不能为空！');
+					}
+					if(mydata.jcrq.length < 1) {
+						return callback('检查日期不能为空！');
+					}
+					if(mydata.sgbz.length < 1) {
+						return callback('施工班组不能为空！');
+					}
+					if(mydata.zzxm.length < 1) {
+						return callback('组长姓名不能为空！');
+					}
+					if(mydata.lxdh.length < 1) {
+						return callback('联系电话不能为空！');
+					}
+					if(mydata.sgrq.length < 1) {
+						return callback('施工日期不能为空！');
+					}
+					mui.ajax(url + 'my_plus/my_project_scsl_list_xz.php', {
+						data: {
+							sjc: mydata.sjc,
+							gcid: mydata.gcid,
+							gcmc: mydata.gcmc,
+							gclb: mydata.gclb,
+							mc: mydata.mc,
+							jcbw: mydata.jcbw,
+							jcrq: mydata.jcrq,
+							jcry: mydata.jcry,
+							sgbz: mydata.sgbz,
+							zzxm: mydata.zzxm,
+							lxdh: mydata.lxdh,
+							sgrq: mydata.sgrq,
+							gzms: mydata.gzms
+						},
+						dataType: 'json',
+						type: 'post',
+						timeout: 10000,
+						success: function(data) {
+							if(data.result == 'success') {
+								return callback();
+							} else {
+								return callback('服务器返回error');
+							}
+
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							//alert('ajax错误'+type);
+							return callback('ajax错误' + type + errorThrown);
+						}
+					});
+				};
+
+			});
+		</script>
+	</body>
+
+</html>

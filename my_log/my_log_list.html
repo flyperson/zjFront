@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>实测实量</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">		
+		<link rel="stylesheet" href="../css/mui.min.css">	
+		<link rel="stylesheet" href="../css/my_css.css">
+		<style type="text/css">
+			.margintop10px {
+				margin-top: 10px;
+			}
+
+			.paddingleft34px {
+				padding-left: 34px;
+			}
+
+			.mui-popover {
+				height: 260px;
+			}
+	
+			#cdbzPopover {
+				min-width: 282px;
+				top: 15% !important;
+				margin-top: 0px;
+				left: 50% !important;
+				margin-left: -141px;
+				position: fixed;
+			}
+	
+			.mui-popover .mui-popover-arrow {
+				display: none !important;
+				}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">日志内容</h1>
+		</header>
+		<div id="gongcheng" class="mui-content ">
+			<div class="mui-content">
+				<div class="mui-card">
+					<ul class="mui-table-view my_list">
+						<li class="mui-table-view-cell my_backgroundcolor_blue2">
+							<a class="a_color" href="">
+								<span class="mui-icon mui-icon-info mui-pull-left my_fontweight my_color_white"></span>
+								<p class="mui-ellipsis my_style2">显示日志说明文字</p>
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<p class="mui-ellipsis my_style1">日志类型</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p class="mui-ellipsis my_style1">部位</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p class="mui-ellipsis my_style1">接收人</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p class="mui-ellipsis my_style1">截止日期</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="mui-content">
+				<div class="mui-card">
+					<ul class="mui-table-view my_list">
+						<li class="mui-table-view-cell my_backgroundcolor_blue2">
+							<a class="a_color" href="">
+								<span class="mui-icon mui-icon-info mui-pull-left my_fontweight my_color_white"></span>
+								<p class="mui-ellipsis my_style2">显示日志说明文字</p>
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<p class="mui-ellipsis my_style1">日志类型</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p class="mui-ellipsis my_style1">部位</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p class="mui-ellipsis my_style1">接收人</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p class="mui-ellipsis my_style1">截止日期</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/service.js" ></script>
+		<script type="text/javascript">
+			var a = document.getElementsByTagName("a");
+			var gcmc=encodeURI(encodeURI('同欣科技大厦A区项目'));
+//			alert(gcmc);
+			a[1].setAttribute("href","my_project.html?gcmc="+gcmc+"");
+			
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				var time = self.time;
+//				alert(time);
+			})
+			
+		</script>
+	<script src="../js/setPullToRefresh.js" ></script>
+	</body>
+</html>

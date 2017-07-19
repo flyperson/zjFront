@@ -1,0 +1,954 @@
+{
+	"@platforms": [
+		"android",
+		"iPhone",
+		"iPad"
+	],
+	"id": "H5DA7A81E",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "实测实量系统",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "1.0.0",/*应用版本名称*/
+		"code": "83"
+	},
+	"description": "",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": "http://www.dcloud.io"
+	},
+	"permissions": {
+		"Accelerometer": {
+			"description": "访问加速度感应器"
+		},
+
+		"Cache": {
+			"description": "管理应用缓存"
+		},
+
+		"Console": {
+			"description": "跟踪调试输出日志"
+		},
+
+
+		"Downloader": {
+			"description": "文件下载管理"
+		},
+		"Events": {
+			"description": "应用扩展事件"
+		},
+		"File": {
+			"description": "访问本地文件系统"
+		},
+		"Gallery": {
+			"description": "访问系统相册"
+		},
+
+		"Invocation": {
+			"description": "使用Native.js能力"
+		},
+
+		"Orientation": {
+			"description": "访问方向感应器"
+		},
+		"Proximity": {
+			"description": "访问距离感应器"
+		},
+		"Storage": {
+			"description": "管理应用本地数据"
+		},
+		"UI": {},
+		"Uploader": {
+			"description": "管理文件上传任务"
+		},
+		"Runtime": {
+			"description": "访问运行期环境"
+		},
+		"XMLHttpRequest": {
+			"description": "跨域网络访问"
+		},
+		"Zip": {
+			"description": "文件压缩与解压缩"
+		},
+
+
+
+
+
+
+		"Webview": {},
+		"NativeUI": {},
+		"Navigator": {},
+		"NativeObj": {},"Device":{},"Camera":{},"Geolocation":{}
+	},
+	"plus": {
+		"splashscreen": {
+			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true,"delay":"300"
+		},
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"permissions": ["<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+			},
+			"orientation": [
+				"portrait-primary",
+				"portrait-secondary"
+			],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png",
+						"retina8": "unpackage/res/icons/180x180.png",
+						"settings-retina8": "unpackage/res/icons/87x87.png"
+					},
+					"ipad": {
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						"normal7": "unpackage/res/icons/76x76.png", /*iPad iOS7程序图标，分辨率：76x76*/
+						"retina7": "unpackage/res/icons/152x152.png", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						"spotlight-normal7": "unpackage/res/icons/40x40.png",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png",/*iPad设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png"
+					}
+				},
+				"android": {
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png"
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
+						"retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": ""
+					},
+					"ipad": {
+						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": ""
+					}
+				},
+				"android": {
+					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "C:/Users/Administrator/Desktop/微信图片_20170526143823.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "G:/迅雷下载/2 (1).png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "G:/迅雷下载/2 (1).png"
+				}
+			}
+		}
+	},
+	"dependencies": {
+		"pages": {
+			"setting.html": {
+				"href": "setting.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/mui.view.js",
+					"libs/easymob-webim-sdk/jquery-1.11.1.js",
+					"libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+					"libs/easymob-webim-sdk/json2.js",
+					"libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+					"js/feedback.js",
+					"js/feedback-page.js",
+					"js/mui.locker.js",
+					"js/app.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/feedback-page.css",
+					"images/iconfont-tianjia.png"
+				],
+				"refer": [
+					"login.html"
+				],
+				"priority": 1
+			},
+			"main.html": {
+				"href": "main.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"js/app.js"
+				],
+				"refer": [
+					"setting.html"
+				],
+				"priority": 1
+			},
+			"unlock.html": {
+				"href": "unlock.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"js/mui.locker.js",
+					"js/app.js"
+				],
+				"refer": [
+					"login.html",
+					"main.html"
+				],
+				"priority": 0
+			},
+			"forget_password.html": {
+				"href": "forget_password.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/app.js"
+				],
+				"priority": 1
+			},
+			"reg.html": {
+				"href": "reg.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/app.js"
+				],
+				"refer": [
+					"login.html"
+				],
+				"priority": 3
+			},
+			"login.html": {
+				"href": "login.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/mui.enterfocus.js",
+					"js/app.js",
+					"images/qihoo.png",
+					"images/qq.png",
+					"images/sinaweibo.png",
+					"images/weixin.png",
+					"js/service.js",
+					"css/my_css.css"
+				],
+				"refer": [
+					"unlock.html",
+					"forget_password.html",
+					"main.html",
+					"reg.html",
+					"index.html"
+				],
+				"priority": 0
+			},
+			"index.html": {
+				"resources": [
+					"js/my_js_index.js",
+					"my.html",
+					"css/my_css.css",
+					"css/iconfont.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					null
+				],
+				"refer": [
+					"leftmenu.html",
+					"team.html"
+				],
+				"priority": 0
+			},
+			"my.html": {
+				"resources": [
+					"js/my_js_nextpage.js",
+					"images/hd.png",
+					"images/gdsz.png",
+					"images/wdrw.png",
+					"images/zjsj.png",
+					"images/xx.png",
+					"images/wdgc.png",
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"my_plus/my_project_list.html",
+					"daily_record.html",
+					"my_plus/my_count.html",
+					"my_log/daily_record.html",
+					"my_count/my_count_one.html",
+					"my_document/my_document.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_project_list.html": {
+				"resources": [
+					"images/xuqiu.png",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"my_plus/my_project.html",
+					"js/service.js",
+					"images/xmmc.png",
+					"js/setPullToRefresh.js"
+				],
+				"refer": [
+					"my_plus/my_project_rzxx.html",
+					"my_plus/my_project_scsl.html",
+					"my_plus/my_project_ggpj.html",
+					"my_plus/my_project_zljc_list.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_project.html": {
+				"resources": [
+					"my_plus/my_project_list.html",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"my_plus/my_project_log.html",
+					"js/service.js"
+				],
+				"refer": [
+					"my_plus/my_project_daily.html",
+					"my_plus/my_count_count.html",
+					"my_plus/my_project_scsl.html",
+					"my_plus/my_project_ggpj.html",
+					"my_plus/my_project_zljc_list.html",
+					"my_plus/my_change_list.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_project_rzxx.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/iconfont.css",
+					"my_plus/my_project_rzxx_list.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_rzxx_list.html": {
+				"resources": [
+					"my_plus/my_project_rzxx.html",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"daily_record.html": {
+				"resources": [
+					"js/my_js_nextpage.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_count.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"my_plus/my_count_count.html"
+				],
+				"priority": 0
+			},
+			"my_log/daily_record.html": {
+				"resources": [
+					"js/my_js_nextpage.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/service.js"
+				],
+				"refer": [
+					"my_log/my_log_list.html"
+				],
+				"priority": 0
+			},
+			"my_log/my_log_list.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/xuqiu.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_log.html": {
+				"resources": [
+					"my_plus/my_project_daily.html",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"my_plus/my_project.html",
+					"js/service.js",
+					"my_plus/my_project_rzxx_bjrz.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_daily.html": {
+				"resources": [
+					"my_plus/my_project_log.html",
+					"js/my_js_nextpage.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/service.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_count_count.html": {
+				"resources": [
+					"css/my_css.css",
+					"js/chart.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/echarts.js",
+					"js/service.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_scsl.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/my_css.css",
+					"my_plus/my_project_scsl_list.html",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"fonts/iconfont.ttf",
+					"js/service.js",
+					"my_plus/my_project_scsl_scsl.html",
+					null
+				],
+				"refer": [
+					"my_plus/my_project_ggpj_xzcd.html",
+					"my_plus/my_project_fjck.html",
+					"my_plus/my_project_scsl_xzcd.html",
+					"my_plus/my_project_scsl_list_xz.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_project_scsl_list.html": {
+				"resources": [
+					"my_plus/my_project_scsl.html",
+					"my_plus/my_project_scsl_scsl.html",
+					"css/iconfont.css",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/my_js_nextpage.js",
+					"js/service.js",
+					"my_plus/my_project_scsl_ggpj.html",
+					"my_plus/my_project_ggpj.html"
+				],
+				"refer": [
+					"my_plus/my_project_scsl_list_xz.html"
+				],
+				"priority": 0
+			},
+			"team.html": {
+				"resources": [
+					"images/xzmc.png",
+					"my_team/team_in.html",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/service.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_team/team_in.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/echarts.js",
+					"my_team/team_in_rwhf.html",
+					"my_team/team_in_myrenwu.html",
+					"js/service.js",
+					"js/common.js",
+					"js/my_js_fhys_xz.js",
+					"js/immersed.js",
+					"images/user-photo.png"
+				],
+				"refer": [
+					"my_team/team_xzrw.html"
+				],
+				"priority": 0
+			},
+			"my_team/team_xzrw.html": {
+				"resources": [
+					"css/my_project_fhys_xz.css",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_team/team_in_rwhf.html": {
+				"resources": [
+					"css/my_project_fhys_xz.css",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/mui.min.js",
+					"my_team/team_in.html",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_team/team_in_myrenwu.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"my_team/team_in.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_scsl_scsl.html": {
+				"resources": [
+					"js/common.js",
+					"my_plus/my_project_scsl_list.html",
+					"js/my_js_fhys_xz.js",
+					"js/immersed.js",
+					"css/my_project_fhys_xz.css",
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/my_scsl.js",
+					"my_plus/my_project_scsl.html",
+					"js/picker.js",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"js/setPullToRefresh.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"my_plus/my_project_scsl_scsl.html"
+				],
+				"refer": [
+					"my_plus/my_project_fjck.html",
+					"my_plus/camera_image.html",
+					"my_plus/my_project_scsl_xzcd.html",
+					"my_plus/my_project_cdfc.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_project_fjck.html": {
+				"resources": [
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"js/service.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/camera_image.html": {
+				"resources": [
+					"js/common.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_rzxx_bjrz.html": {
+				"resources": [
+					"images/images/iconfont-tianjia.png",
+					"my_plus/my_project_log.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_scsl_xzcd.html": {
+				"resources": [
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"css/mui.min.css",
+					"css/my_project_fhys_xz.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_scsl_list_xz.html": {
+				"resources": [
+					"js/common.js",
+					"js/immersed.js",
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_scsl_ggpj.html": {
+				"resources": [
+					"js/common.js",
+					"js/immersed.js",
+					"css/my_project_fhys_xz.css",
+					"my_plus/my_project_scsl_list.html",
+					"my_plus/my_project_ggpj_list.html",
+					"my_plus/my_project_ggpj.html",
+					"js/my_ggpj.js",
+					"css/mui.min.css",
+					"images/sz.png",
+					"images/sinaweibo.png",
+					"images/xmmc.png",
+					"images/gcwd.png",
+					"js/service.js",
+					"css/my_css.css",
+					"js/echarts-all.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"my_plus/my_project_ggpj_xzcd.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_project_ggpj_xzcd.html": {
+				"resources": [
+					"js/ggpj_xzcd.js",
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"css/mui.min.css",
+					"css/my_project_fhys_xz.css",
+					"js/setPullToRefresh.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_ggpj.html": {
+				"resources": [
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"fonts/iconfont.ttf",
+					"my_plus/my_project_scsl_list.html",
+					"my_plus/my_project_ggpj_list.html",
+					"my_plus/my_project_scsl_ggpj.html"
+				],
+				"refer": [
+					"my_plus/my_project_ggpj_xzcd.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_project_ggpj_list.html": {
+				"resources": [
+					"my_plus/my_project_scsl_ggpj.html",
+					"js/my_js_nextpage.js",
+					"my_plus/my_project_ggpj.html",
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_zljc_list.html": {
+				"resources": [
+					"js/my_js_nextpage.js",
+					"my_plus/my_project_zljc.html",
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"js/setPullToRefresh.js"
+				],
+				"refer": [
+					"my_plus/my_project_ggpj.html",
+					"my_plus/my_project_scsl.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_project_zljc.html": {
+				"resources": [
+					"fonts/iconfont.ttf",
+					"my_plus/my_project_zljc_list.html",
+					"css/iconfont.css",
+					"js/service.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"my_plus/my_project_ggpj.html",
+					"my_plus/my_project_scsl.html",
+					"my_plus/my_scsl_count_count.html",
+					"my_plus/my_scsl_pj.html"
+				],
+				"priority": 0
+			},
+			"my_count/my_count_one.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/setPullToRefresh.js"
+				],
+				"refer": [
+					"my_count/my_count_two.html"
+				],
+				"priority": 0
+			},
+			"my_count/my_count_two.html": {
+				"resources": [
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/common.js",
+					"js/immersed.js",
+					"js/service.js",
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_project_cdfc.html": {
+				"resources": [
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/my_project_fhys_xz.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_scsl_count_count.html": {
+				"resources": [
+					"js/echarts.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_document/my_document.html": {
+				"resources": [
+					"images/fdisk.png",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"js/immersed.js",
+					"images/images/iconfont-tianjia.png",
+					"js/service.js",
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_scsl_pj.html": {
+				"resources": [
+					"js/echarts.js",
+					"js/setPullToRefresh.js",
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_plus/my_change_list.html": {
+				"resources": [
+					"js/my_change_list_changan.js",
+					"css/my_project_fhys_xz.css",
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"my_plus/my_change_ckcg.html",
+					"my_plus/my_change_manager.html"
+				],
+				"refer": [
+					"my_plus/my_change_cgxz.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_change_cgxz.html": {
+				"resources": [
+					"js/common.js",
+					"js/my_tzdxgry_xinxi.js",
+					"js/immersed.js"
+				],
+				"refer": [
+					"my_plus/my_change_wztm.html",
+					"my_plus/my_change_tkgl.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_change_tkgl.html": {
+				"resources": [
+					"js/my_js_wztmtpsc_xz.js"
+				],
+				"refer": [
+					"my_plus/my_change_wztmbj2.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_change_ckcg.html": {
+				"resources": [
+					"js/service.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/immersed.js",
+					"css/my_project_fhys_xz.css",
+					"my_plus/my_change_list.html"
+				],
+				"refer": [
+					"my_plus/my_change_cgwztmck.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_change_cgwztmck.html": {
+				"resources": [
+					"js/my_js_cgwztmck.js"
+				],
+				"refer": [
+					"my_plus/my_project_ckcg_wztmtj.html",
+					"my_plus/my_change_wztmbj.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_project_ckcg_wztmtj.html": {
+				"resources": [],
+				"refer": [
+					"my_plus/my_change_wztm_tianjia.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_change_manager.html": {
+				"resources": [
+					"js/mui.zoom.js",
+					"css/imgView.css",
+					"js/my_js_zggl.js",
+					"js/mui.previewimage.js",
+					"my_plus/my_change_list.html",
+					"js/common.js",
+					"js/immersed.js",
+					"images/zpxz.jpg"
+				],
+				"refer": [
+					"my_plus/my_new_change.html"
+				],
+				"priority": 0
+			},
+			"my_plus/my_new_change.html": {
+				"resources": [
+					"js/my_js_zggl_yulan.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"leftmenu.html": {
+				"resources": [],
+				"refer": [
+					"setting.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"libs/easymob-webim-sdk/quickstart.md",
+				"README.md"
+			]
+		}
+	},
+	"unpackage":[
+	  "README.md"
+	]
+}

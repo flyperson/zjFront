@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>实测实量</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/my_css.css">
+		<style type="text/css">
+			.margintop10px {
+				margin-top: 10px;
+			}
+			
+			.paddingleft34px {
+				padding-left: 34px;
+			}
+			
+			.mui-popover {
+				height: 260px;
+			}
+			
+			#cdbzPopover {
+				min-width: 282px;
+				top: 15% !important;
+				margin-top: 0px;
+				left: 50% !important;
+				margin-left: -141px;
+				position: fixed;
+			}
+			
+			.mui-popover .mui-popover-arrow {
+				display: none !important;
+			}
+			
+			.block {
+				height: 10px;
+				margin: 0px auto;
+				position: relative;
+				padding-top: 10px;
+			}
+			
+			.fitem {
+				width: 96%;
+				overflow: hidden;
+				padding: 10px 2%;
+				border-bottom: 1px solid #c6c6c6;
+				text-align: left;
+			}
+			
+			.fitem:active {
+				background: #f4f4f4;
+			}
+			
+			.ficon {
+				height: 40px;
+				float: left;
+				margin-right: 8px;
+			}
+			
+			.fup {
+				line-height: 40px;
+			}
+			
+			.fname {
+				font-weight: bolder;
+				height: 22px;
+				font-size: 16px;
+			}
+			
+			.finf {
+				height: 18px;
+				font-size: 12px;
+			}
+			
+			.black {
+				color: #000000;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">工程文档</h1>
+		</header> 
+		<nav class="mui-bar mui-bar-tab">
+			<form class="block" action="http://202.105.179.167:8080/zjadmin/zjejsgs/upload/upload_file.php" method="post" enctype="multipart/form-data">
+				<input type="file" name="file" id="file">
+				<input type="hidden" name="sjc" id="sjc">
+				<input type="submit" name="submit" value="提交">
+			</form>
+		</nav>
+		<div class="mui-content">
+			<div id="dcontent" class="dcontent">
+				<!--<div class="fitem">
+					<a class="black" href="http://192.168.0.11:80/zjejsgs/upload/upload/社工视频.doc">
+						<img class="ficon" src="../images/fdisk.png" />
+						<div>
+							<span class="fname">社工视频.doc</span><br/>
+							<span class="finf">...</span> 
+						</div>
+					</a>
+				</div>-->
+			</div>
+			<script src="../js/mui.min.js"></script>
+			<script src="../js/service.js"></script>
+			<script>
+				var sjc = document.getElementById("sjc");
+				var myDate = new Date()
+				var timeShijianchuo = myDate.getTime();
+				sjc.value = timeShijianchuo;
+
+				mui.plusReady(function() {
+					var dcontent = document.getElementById("dcontent");
+
+					//动态获取文件名称及路径
+					mui.ajax(url + 'upload/my_download.php', {
+						data: {
+
+						},
+						dataType: 'json',
+						type: 'post',
+						timeout: 10000,
+						success: function(data) {
+							var length = data.length; //数据返回的形式是数组，在这里先判断数组的长度
+							if(length > 0) {
+								for(var i = 0; i < length - 1; i++) {
+									wjmc = data[i].文件名称;
+									wjgs = data[i].文件格式;
+									Url = "" + url + "upload/upload/" + wjmc + "";
+									//									alert(Url);
+									documents(Url, wjmc, wjgs);
+								}
+							} else {
+
+							}
+
+						},
+						error: function(xhr, type, errorThrown) {
+							alert('ajax错误' + type + '---' + errorThrown);
+						}
+					});
+
+					//动态创建文件
+					var documents = function(Url, wjmc, wjgs) {
+						var oDiv = document.createElement("div");
+						oDiv.className = "fitem";
+						oDiv.innerHTML = '<a class="black" href="' + Url + '"><img class="ficon" src="../images/fdisk.png" /><div><span class="fname">' + wjmc + '</span><br/><span class="finf">...</span></div></a>';
+						dcontent.appendChild(oDiv);
+					}
+				});
+			</script>
+	</body>
+
+</html>

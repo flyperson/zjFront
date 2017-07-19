@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron my_list" id="projectlist">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="my_team_plus/team_in.html">
+						<img class="mui-media-object mui-pull-left" src="images/xzmc.png">
+						<div class="mui-media-body">
+							空
+							<p class='mui-ellipsis'>xxx施工单位</p>
+						</div>
+					</a>
+				</li>
+			</ul>			
+		</div>
+	</body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			mui.plusReady(function(){
+				//获取传值
+				var self = plus.webview.currentWebview();
+				//手机号全局变量
+				mobile = self.mobile;
+			});
+		</script>
+	
+
+</html>

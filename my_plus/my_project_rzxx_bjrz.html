@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a  class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"  ></a>
+		    <a id='save' class="mui-btn mui-btn-link mui-pull-right mui-btn-blue" >保存</a>
+		    <h1 class="mui-title">加载中...</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="mui-content-padded" style="margin: 10px;">
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>日志名称:</label>
+		           	 	<input id="rzmc" type="text" class="mui-input-clear" placeholder="请输入日志名称">
+					</div>
+					<div class="mui-input-row">
+						<label>日志类型:</label>
+		            	<input id="rzlx" type="text" class="mui-input-clear" placeholder="请输入日志类型">
+					</div>
+					<div class="mui-input-row">
+						<label>部位:</label>
+            			<input id="bw" type="text" class="mui-input-clear" placeholder="请输入部分">
+					</div>
+					<div class="mui-input-row">
+						<label>接收人:</label>
+		            	<input id="jsr" type="text" class="mui-input-clear" placeholder="请输入接收人">
+					</div>
+					<div class="mui-input-row">
+						<label>填写人:</label>
+		            	<input id="txr" type="text" class="mui-input-clear" placeholder="请输入填写人">
+					</div>
+				    <div class="mui-input-row">
+						<label>岗位:</label>
+		            	<input id="gw" type="text" class="mui-input-clear" placeholder="请输入岗位">
+					</div>
+					<div class="mui-input-row">
+						<label>截止日期:</label>
+			            <input id="jzrq" type="text" class="mui-input-clear" placeholder="请选择截止日期" readonly="readonly">
+			        </div>
+				</form>
+				<form class="mui-input-group" style="top: 5px;">
+					<div class="" style="margin: 5px;padding: 7px 10px;">
+						<label>日志内容说明：</label>
+						<textarea id="rznrsm" class="mui-input-clear" rows="4" placeholder="请输入日志内容说明"></textarea>
+					</div>
+				</form>
+				<form class="mui-input-group" style="top: 5px;">
+					<div class="mui-input-row">
+			            <label>任务附件:</label>
+			            <input id="fjxx" type="text" class="mui-input-clear" placeholder="附件名称" readonly="readonly">
+		       		</div>
+		       		<div style="width:100%;height:70px;margin:5px;padding: 7px 10px; ">
+		        		<img id="rwfj" src="../images/images/iconfont-tianjia.png"  width="50" height="50"  />
+		        	</div>
+				</form>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/service.js" ></script>
+
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function(){
+				var doc = document;
+				//获取url参数值
+				function geturl(name){
+					var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+					var r = window.location.search.substr(1).match(reg);
+					if(r!=null)return  unescape(r[2]);
+					return null;
+				}
+				sjc = geturl("sjc");
+				var rzmc = geturl("rzmc");
+				var mytime = geturl("mytime");
+				var id = geturl("id");
+				//对汉字的编码进行还原
+				rzmc = decodeURI(rzmc);
+				//截止日期
+				var jzrq = doc.getElementById("jzrq");
+				jzrq.addEventListener('tap',function(){
+					plus.nativeUI.pickDate( function(e){
+					d=e.date;
+                    jzrq.value = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+				   });
+				});
+				
+				
+				//任务附件
+				var rwfj = doc.getElementById("rwfj");
+				rwfj.addEventListener('tap',function(){
+					plus.gallery.pick(
+				        function(path) {
+				            images.src = path; //设置img的路径
+				            //把图片base64编码  注意：这里必须在onload事件里执行！这给我坑的不轻
+				            images.onload = function() {
+				                var data = getBase64Image(images);    //base64编码
+				                var newImgbase = data.split(",")[1];  //通过逗号分割到新的编码
+				                imgArray.push(newImgbase);            //放到imgArray数组里面
+				                images.off('load');                   //关闭加载
+				                }
+				            },
+				            function(e) {
+				                mui.toast('取消选择');
+		                	});
+				   });
+				//获取日期
+				var self = plus.webview.currentWebview();
+				mytime = self.mytime;
+//				alert(mytime);
+
+				//动态获取标题
+				var h1 = doc.getElementsByTagName("h1");
+				h1[0].firstChild.nodeValue = rzmc;
+				
+				//异步获取日志信息
+				var rzmc = doc.getElementById("rzmc");
+				var rzlx = doc.getElementById("rzlx");
+				var bw = doc.getElementById("bw");
+				var rznrsm = doc.getElementById("rznrsm");
+				var jsr = doc.getElementById("jsr");
+				var jzrq = doc.getElementById("jzrq");
+				var txr  = doc.getElementById("txr");
+				var gw  = doc.getElementById("gw");
+				var rwfj = doc.getElementById("rwfj");
+//				alert(sjc);
+				
+				mui.ajax(url + 'my_plus/my_project_rzxx_bjrz.php',{
+					data: {
+						sjc:sjc
+					},
+					dataType:'json',
+					type: 'post',
+					timeout: 10000,
+					success: function(data){
+						var length = data.length;
+						for(i = 0; i < length - 1; i++) {
+							 rzmc.value = data[i].日志名称;
+							 rzlx.value = data[i].日志类型;
+							 bw.value = data[i].部位;
+							 rznrsm.value = data[i].日志内容说明;
+							 jsr.value = data[i].接收人;
+							 jzrq.value = data[i].截止日期;
+							 txr.value = data[i].填写人;
+							 gw.value = data[i].岗位;
+						}
+//						alert(data);
+						h1[0].firstChild.nodeValue = rzmc.value;
+					},
+					error: function(xhr, type, errorThrown) {
+//						alert('ajax错误' + type + '---' + errorThrown);
+					}
+					
+				});
+				
+				//修改日志信息
+				var save = doc.getElementById("save");
+				save.addEventListener('tap',function(){
+					var mydata = {
+							rzmc:rzmc.value,
+						    rzlx:rzlx.value,
+						    bw:bw.value,
+						    rznrsm:rznrsm.value,
+						    jsr:jsr.value,
+						    jzrq:jzrq.value,
+						    sjc:sjc,
+						    mytime:mytime
+						};
+					    //异步传值
+						alterajaxform(mydata,function(err){
+							if (err) {
+								plus.nativeUI.toast(err);
+								return;
+							}
+							plus.nativeUI.toast('修改成功');
+							window.location.reload();
+						});
+				});
+				
+				
+					var alterajaxform = function(mydata,callback){
+						callback = callback || $.noop;
+						mydata = mydata || {};
+						mydata.rzmc = mydata.rzmc || '';
+						mydata.rzlx = mydata.rzlx || '';
+						mydata.bw = mydata.bw || '';			
+						mydata.rznrsm = mydata.rznrsm || '';
+						mydata.jsr = mydata.jsr || '';
+						mydata.jzrq = mydata.jzrq || '';
+						mydata.sjc = mydata.sjc || '';
+						mydata.mytime = mydata.mytime || '';
+					
+						mui.ajax(url+'my_plus/my_project_rzxx_alter.php',{
+						data:{
+							rzmc:mydata.rzmc,
+							rzlx:mydata.rzlx,
+							bw:mydata.bw,
+							rznrsm:mydata.rznrsm,
+							jsr:mydata.jsr,
+							jzrq:mydata.jzrq,
+							sjc:mydata.sjc,
+							mytime:mydata.mytime
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；//利用native.js实习系统分享功能
+						success:function(data){
+//							alert(data);
+							if(data.result=='success'){
+								return callback();
+							}
+							else{
+								return callback('服务器返回error');
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							//异常处理
+//							return callback('ajax错误'+type+errorThrown);
+						}
+					});
+				}
+		    });
+		</script>
+	</body>
+
+</html>

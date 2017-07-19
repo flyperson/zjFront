@@ -1,0 +1,469 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" ></a>
+		    <a id='save' class="mui-btn mui-btn-link mui-pull-right mui-btn-blue" >保存</a>
+		    <h1 class="mui-title">新建日志</h1>
+		</header>
+		<div class="mui-content mui-content-padded"  style="margin: 5px;">
+			<div class="mui-content-padded" style="margin: 10px;">
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>日志名称:</label>
+		           	 	<input id="rzmc" type="text" class="mui-input-clear" placeholder="请输入日志名称">
+					</div>
+					<div class="mui-input-row">
+						<!--<label>日志类型:</label>
+		            	<input id="rzlx" type="text" class="mui-input-clear" placeholder="请输入日志类型">-->
+		            	<label>日志类型：</label>
+						<select id="rzlx">
+							<option value ="" selected="selected"></option>
+							<option value ="技术交底">软件测试</option>
+							<option value ="隐蔽验收">隐蔽验收</option>
+							<option value ="迎检工作">迎检工作</option>
+							<option value ="工作例会">工作例会</option>
+							<option value ="软件投诉">软件投诉</option>
+							<option value ="其他">其他</option>
+						</select>
+					</div>
+					<div class="mui-input-row">
+						<label>部位:</label>
+            			<input id="bw" type="text" class="mui-input-clear" placeholder="请输入部分">
+					</div>
+					<div class="mui-input-row">
+						<label>接收人:</label>
+		            	<input id="jsr" type="text" class="mui-input-clear" placeholder="请输入接收人">
+					</div>
+					<div class="mui-input-row">
+						<label>填写人:</label>
+		            	<input id="txr" type="text" class="mui-input-clear" placeholder="请输入填写人">
+					</div>
+				    <div class="mui-input-row">
+						<label>岗位:</label>
+		            	<input id="gw" type="text" class="mui-input-clear" placeholder="请输入岗位">
+					</div>
+					<div class="mui-input-row">
+						<label>截止日期:</label>
+			            <input id="jzrq" type="text" class="mui-input-clear" placeholder="请选择截止日期" readonly="readonly">
+			        </div>
+				</form>
+				<form class="mui-input-group" style="top: 5px;">
+					<div class="" style="margin: 5px;padding: 7px 10px;">
+						<label>日志内容说明：</label>
+						<textarea id="rznrsm" class="mui-input-clear" rows="4" placeholder="请输入日志内容说明"></textarea>
+					</div>
+				</form>
+				<form class="mui-input-group" style="top: 5px;">
+					<div class="mui-input-row">
+			            <label>任务附件:</label>
+			            <input id="fjxx" type="text" class="mui-input-clear" placeholder="附件名称" readonly="readonly">
+		       		</div>
+		       		<div style="width:100%;height:70px;margin:5px;padding: 7px 10px; ">
+		        		<img id="rwfj" src="../images/images/iconfont-tianjia.png"  width="50" height="50"  />
+		        	</div>
+				</form>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/service.js" ></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function(){
+				var doc = document;
+				var rzlx = doc.getElementById("rzlx");
+				var bw = doc.getElementById("bw");
+				var rznrsm = doc.getElementById("rznrsm");
+				var jsr = doc.getElementById("jsr");
+				var jzrq = doc.getElementById("jzrq");
+				var rzmc = doc.getElementById("rzmc");
+				var txr  = doc.getElementById("txr");
+				var gw  = doc.getElementById("gw");
+				var save = doc.getElementById("save");//保存
+				var fjxx = doc.getElementById("fjxx");
+				//获取传值
+				var self = plus.webview.currentWebview();
+				mytime = self.mytime;
+				gcid = self.gcid;
+				//截止日期
+				var jzrq = doc.getElementById("jzrq");
+				jzrq.addEventListener('tap',function(){
+					plus.nativeUI.pickDate( function(e){
+					d=e.date;
+					if((d.getMonth()+1)>9){
+						jzrq.value = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+					} else {
+						jzrq.value = d.getFullYear()+"-"+"0"+(d.getMonth()+1)+"-"+d.getDate();
+					}
+//                  jzrq.value = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+				   });
+				});
+				
+//				alert('2');
+				//任务附件
+				var rwfj = doc.getElementById("rwfj");
+				rwfj.addEventListener('tap',function(){
+//					plus.gallery.pick(
+//				        function(path) {
+//				            images.src = path; //设置img的路径
+//				            //把图片base64编码  注意：这里必须在onload事件里执行！这给我坑的不轻
+//				            images.onload = function() {
+//				                var data = getBase64Image(images);    //base64编码
+//				                var newImgbase = data.split(",")[1];  //通过逗号分割到新的编码
+//				                imgArray.push(newImgbase);            //放到imgArray数组里面
+//				                images.off('load');                   //关闭加载
+//				                }
+//				            },
+//				            function(e) {
+//				                mui.toast('取消选择');
+//		                	});
+					var myactionSheet = function() {
+						var btnArray = [
+							{ title: "拍照" },
+							{ title: "相册" }
+						];
+						plus.nativeUI.actionSheet({
+							title: "操作",
+							cancel: "取消",
+							buttons: btnArray
+						}, function(e) {
+							var index = e.index;
+							var text = "你刚点击了\"";
+							switch(index) {
+								case 0:
+									text += "取消";
+									break;
+								case 1:
+									getImage();
+									text += "拍照";
+									break;
+								case 2:
+									galleryImg();
+									text += "相册";
+									break;
+							}
+							//info.innerHTML = text+"\"按钮";
+						});
+					};
+					myactionSheet();
+				   });
+				//上传文件
+//var i = 1,
+//	gentry = null,
+//	w = null;
+//var hl = null,
+//	le = null,
+//	de = null,
+//	ie = null;
+//var unv = true;
+//// H5 plus事件处理
+//function plusReady_camera() {
+//	// 获取摄像头目录对象
+//	plus.io.resolveLocalFileSystemURL("_doc/", function(entry) {
+//		entry.getDirectory("camera/fhys", { create: true }, function(dir) {
+//			gentry = dir;
+//			//updateHistory();
+//		}, function(e) {
+//			outSet("Get directory \"camera\fhys\" failed: " + e.message);
+//		});
+//	}, function(e) {
+//		outSet("Resolve \"_doc/\" failed: " + e.message);
+//	});
+//}
+//if(window.plus) {
+//	plusReady_camera();
+//} else {
+//	document.addEventListener("plusready", plusReady_camera, false);
+//}
+//// 监听DOMContentLoaded事件
+//document.addEventListener("DOMContentLoaded", function() {
+//	// 获取DOM元素对象
+//	//验收照片
+//	hl_yszp = document.getElementById("history_yszp");
+//	le_yszp = document.getElementById("empty_yszp");
+//
+//	de = document.getElementById("display");
+//	if(ie = document.getElementById("index")) {
+//		ie.onchange = indexChanged;
+//	}
+//	// 判断是否支持video标签
+//	unv = !document.createElement('video').canPlayType;
+//}, false);
+//
+////选择前后摄像头
+//function changeIndex() {
+//	outSet("选择摄像头：");
+//	ie.focus();
+//}
+//
+//function indexChanged() {
+//	de.innerText = ie.options[ie.selectedIndex].innerText;
+//	i = parseInt(ie.value);
+//	outLine(de.innerText);
+//}
+//
+//// 拍照函数
+//function getImage() {
+//	outSet("开始拍照：");
+//	var cmr = plus.camera.getCamera(); //获取摄像头管理对象	
+//	//进行拍照操作cmr.captureImage( successCB, errorCB, option );
+//	cmr.captureImage(function(p) {
+//		outLine("成功：" + p);
+//		// resolveLocalFileSystemURL(url,succesCB,errorCB )通过URL参数获取目录对象或文件对象
+//		plus.io.resolveLocalFileSystemURL(p, function(entry) {
+//			createItem(p, entry, lx);
+//		}, function(e) {
+//			outLine("读取拍照文件错误：" + e.message);
+//		});
+//	}, function(e) {
+//		outLine("失败：" + e.message);
+//	}, { filename: "_doc/camera/fhys/", index: 1 });
+//}
+//
+//// 从相册中选择图片
+//function galleryImg(lx) {
+//	// 从相册中选择图片
+//	plus.gallery.pick(function(path) {
+//		plus.io.resolveLocalFileSystemURL(path, function(entry) {
+////			createItem(path, entry, lx);
+////			alert(entry.name);
+//			fjxx.value = path;
+//		}, function(e) {
+//			outLine("读取拍照文件错误：" + e.message);
+//		});
+//		//showImg( path );
+//		//createItem(path);
+//	}, function(e) {
+//		outSet("取消选择图片");
+//	}, { filter: "image" });
+//}
+//
+//// 添加播放项
+//var index;
+//var index_yszp = 1;
+//var index_hxpmt = 1;
+//var index_ysjl = 1;
+//var index_bcjl = 1;
+////alert('222')
+//function createItem(p, entry, lx) {
+//	var fileName=entry.name;
+////	alert(fileName);
+//	var li = document.createElement("li");
+//	li.className = "ditem";
+//	li.innerHTML = '<span class="iplay"><font class="aname"></font><br/><font class="ainf"></font></span>';
+//	li.setAttribute("onclick", "displayFile(this);");
+//	if(lx == 'yszp') {
+//		hl = hl_yszp;
+//		le = le_yszp;
+//		files_yszp.push({ name: "upfile" + index_yszp, path: p });
+//		index_yszp++;
+//	} else {
+//
+//	}
+//	hl.insertBefore(li, le.nextSibling);
+//	li.querySelector(".aname").innerText = fileName;
+//	li.querySelector(".ainf").innerText = "...";
+//	li.entry = entry;
+//	updateInformation(li);
+//	le.style.display = "none";
+//}
+//// 获取录音文件信息
+//function updateInformation(li) {
+//	if(!li || !li.entry) {
+//		return;
+//	}
+//	var entry = li.entry;
+//	entry.getMetadata(function(metadata) {
+//		li.querySelector(".ainf").innerText = dateToStr(metadata.modificationTime);
+//	}, function(e) {
+//		outLine("获取文件\"" + entry.name + "\"信息失败：" + e.message);
+//	});
+//}
+//// 获取录音历史列表
+//function updateHistory() {
+//	if(!gentry) {
+//		return;
+//	}
+//	var reader = gentry.createReader();
+//	reader.readEntries(function(entries) {
+//		for(var i in entries) {
+//			if(entries[i].isFile) {
+//				createItem(entries[i]);
+//			}
+//		}
+//	}, function(e) {
+//		outLine("读取录音列表失败：" + e.message);
+//	});
+//}
+//
+//// 清除历史记录
+//function cleanHistory(lx) {
+//	var btnArray = ['确定', '取消'];
+//	mui.confirm('您确定要清空记录吗？', '警告:', btnArray, function(e) {
+//		if(e.index == 0) {
+//			if(lx == 'yszp') {
+//				hl_yszp.innerHTML = '<li id="empty_yszp" class="ditem-empty">无历史记录</li>';
+//				le_yszp = document.getElementById("empty_yszp");
+//				files_yszp = [];
+//				index_yszp = 1;
+//			} else {
+//
+//			}
+//
+//			// 删除音频文件
+//			outSet("清空拍照录像历史记录：ok");
+//		} else {
+//			//info.innerText = '取消';
+//			return;
+//		}
+//	});
+//}
+//
+///*----------上传----------*/
+//var server = url + "fileupload.php";
+////var server="http://demo.dcloud.net.cn/helloh5/uploader/upload.php";
+//var files = [];
+//var files_yszp = [];
+//save.addEventListener('tap',upload);
+//function upload() {
+//	var myfile = fjxx.value;
+////	alert(fjxx.value);
+//	//获取url参数值
+//	function geturl(name) {
+//		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+//		var r = window.location.search.substr(1).match(reg);
+//		if(r != null) return unescape(r[2]);
+//		return null;
+//	}
+////	var rzmc = rzmc.value;
+////	alert(rzmc);
+//	var wt = plus.nativeUI.showWaiting();
+//	var task = plus.uploader.createUpload(server, { method: "POST" }, function(t, status) {
+//		//上传完成
+//		if(status == 200) {
+//			alert("上传成功：" + t.responseText);
+//			wt.close();
+//			var button_lx = document.getElementById(lx);
+//			var button_clean = document.getElementById(clean);
+//			button_lx.disabled = true;
+//			button_clean.disabled = true;
+//			button_lx.innerText = "上传成功";
+//		} else {
+//			alert("上传失败：" + status);
+//			wt.close();
+//		}
+//	});
+//	
+//	task.addData("uid", getUid());
+////	nub = files.length.toString();
+//	nub = '1';
+//	task.addData("nud", nud);
+//	task.addData("fjxx", myfile);
+////	task.addData("rzmc", rzmc);
+//	task.addFile(myfile);
+////	for(var i = 0; i < files.length; i++) {
+////		var f = files[i];
+////		task.addFile(f.path, { key: f.name });
+////	}
+//	
+//	task.start();
+////	files = [];
+//}
+//
+//// 产生一个随机数
+//function getUid() {
+//	return Math.floor(Math.random() * 100000000 + 10000000).toString();
+//};
+				//获取时间戳
+				var sjc = new Date().getTime();
+				save.addEventListener('tap',function(){
+					var mydata = {
+							rzmc:rzmc.value,
+						    rzlx:rzlx.value,
+						    bw:bw.value,
+						    rznrsm:rznrsm.value,
+						    jsr:jsr.value,
+						    jzrq:jzrq.value,
+						    txr:txr.value,
+						    gw:gw.value,
+						    sjc:sjc,
+						    mytime:mytime,
+						    gcid:gcid
+						};
+					    //异步传值
+						xjrzajaxform(mydata,function(err){
+							if (err) {
+								plus.nativeUI.toast(err);
+								return;
+							}
+							//plus.nativeUI.toast('保存成功');
+							var target=plus.webview.getWebviewById('my_project_log');
+							mui.fire(target,'json',{
+////								flag:'mytime'
+							});
+							mui.back();
+						});
+				});
+					
+					
+					var xjrzajaxform = function(mydata,callback){
+						callback = callback || $.noop;
+						mydata = mydata || {};
+						mydata.rzmc = mydata.rzmc || '';
+						mydata.rzlx = mydata.rzlx || '';
+						mydata.bw = mydata.bw || '';			
+						mydata.rznrsm = mydata.rznrsm || '';
+						mydata.jsr = mydata.jsr || '';
+						mydata.jzrq = mydata.jzrq || '';
+						mydata.txr = mydata.txr || '';
+						mydata.gw = mydata.gw || '';
+						mydata.sjc = mydata.sjc || '';
+						mydata.mytime = mydata.mytime || '';
+						mydata.gcid = mydata.gcid || '';
+						mui.ajax(url+'my_plus/my_project_rzxx_xjrz.php',{
+						data:{
+							rzmc:mydata.rzmc,
+							rzlx:mydata.rzlx,
+							bw:mydata.bw,
+							rznrsm:mydata.rznrsm,
+							jsr:mydata.jsr,
+							jzrq:mydata.jzrq,
+							txr:mydata.txr,
+							gw:mydata.gw,
+							sjc:mydata.sjc,
+							mytime:mydata.mytime,
+							gcid:mydata.gcid
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；//利用native.js实习系统分享功能
+						success:function(data){
+//							alert(data);
+							if(data.result=='success'){
+								return callback();
+							}
+//							else{
+//								return callback('服务器返回error');
+//							}
+						},
+						error:function(xhr,type,errorThrown){
+////							异常处理
+//							return callback('ajax错误'+type+errorThrown);
+						}
+					});
+				}
+		    });
+		</script>
+	</body>
+
+</html>

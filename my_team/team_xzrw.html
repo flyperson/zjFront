@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">			
+		<link rel="stylesheet" href="../css/mui.min.css">	
+		<link rel="stylesheet" href="../css/my_css.css">	
+		<link rel="stylesheet" href="../css/my_project_fhys_xz.css" />	
+		<style type="text/css">	
+			#rwzyx{				
+				background-color: #00BFFF;
+			}
+			#zuxz{
+				width: 100px;
+				
+			}	
+			#qtcy{
+				width: 100px;
+				font-size: 1.08em;
+				margin-top: -1px;
+			}		
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a id='wchen' class="mui-btn mui-btn-link mui-pull-right mui-btn-blue ">完成</a>
+			<h1 class="mui-title">新增任务</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded" style="margin: 5px;">
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>任务类别：</label>
+					</div>
+				</form>
+				<form class="mui-input-group">
+					<div class="" style="margin: 5px;padding: 7px 10px;">
+						<label>任务描述</label>
+						<textarea class="mui-input-clear" id="rwms" rows="1"></textarea>
+					</div>
+				</form>
+				<form class="mui-input-group">
+					<div class="" style="margin: 5px; padding: 10px 10px;">
+						<label>任务接收人：</label>
+						<textarea id="rwjsr" class="mui-input-clear" rows="2" placeholder=""></textarea>
+					</div>
+				</form>
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>部位：</label>
+						<input id="buwei" class="mui-input-clear" type="text" placeholder="任务部位" />
+					</div>
+					<div class="mui-input-row">
+						<label>截止日期：</label>
+						<input id="jzrq" class="mui-input-clear" type="text" placeholder="截止日期" />
+					</div>
+				</form>
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>任务附件：</label>
+						<input class="mui-input-clear" type="text" id="rwsc" placeholder="点击上传" />
+					</div>
+					<div class="mui-card" style="width: 200px;">
+						<label style="margin: 20px; ">无历史记录</label>
+						<textarea id="dfd" class="mui-input-clear" rows="1"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="mui-button-row my_margintop10px my_marginbottom10px">
+				<button id="qkjl" type="button" class="mui-btn mui-btn-primary">清空历史记录</button>	 				
+			</div>
+		</div>
+		
+	</body>
+	<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>实测实量</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/iconfont.css">
+		<link rel="stylesheet" href="../css/my_css.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<style>
+			.mui-control-content {
+				bottom: 0px;
+			}
+			/*媒体查询，横屏效果*/
+			
+			@media only screen and (orientation:landscape) {
+				.mui-control-content {
+					bottom: 0px;
+				}
+			}
+			
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+			
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			
+			.oa-contact-content {
+				width: 100%;
+			}
+			
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			
+			.oa-contact-name,
+			oa-contact-position {
+				float: left;
+			}
+			
+			.mui-popover {
+				height: 290px;
+			}
+			
+			#zuyPopover {
+				min-width: 282px;
+				top: 15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			#zybjPopover {
+				min-width: 282px;
+				top: 15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			.mui-popover .mui-popover-arrow {
+				display: none !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a  class="mui-icon mui-icon-bars mui-pull-right"></a>
+			<h1 class="mui-title">加载中...</h1>
+		</header>
+		<div class="mui-content" id="scsl" >
+			
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/my_js_nextpage.js"></script>
+		<script src="../js/service.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			(function($) {
+				$('#scroll').scroll({
+					indicators: true //是否显示滚动条
+				});
+				var segmentedControl = document.getElementById('segmentedControl');
+				$('.mui-input-group').on('change', 'input', function() {
+					if(this.checked) {
+						var styleEl = document.querySelector('input[name="style"]:checked');
+						var colorEl = document.querySelector('input[name="color"]:checked');
+						if(styleEl && colorEl) {
+							var style = styleEl.value;
+							var color = colorEl.value;
+							segmentedControl.className = 'mui-segmented-control' + (style ? (' mui-segmented-control-' + style) : '') + ' mui-segmented-control-' + color;
+						}
+					}
+				});
+			})(mui);
+
+			//所有的JS文件都放在这个封装的函数里*********************************************************************************
+			mui.plusReady(function() {
+				//获取url参数值
+				function geturl(name) {
+					var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+					var r = window.location.search.substr(1).match(reg);
+					if(r != null) return unescape(r[2]);
+					return null;
+				}
+				//获取传参
+				var self = plus.webview.currentWebview();
+				var gcid = self.gcid;
+				var gcmc = self.gcmc;
+//				alert(gcid);
+				
+				
+				var a = document.getElementsByTagName('a');
+				a[1].setAttribute('id','my_popover');
+				//获取右上角按钮的监听
+				var my_popover = document.getElementById("my_popover");
+				my_popover.addEventListener('tap', function() {
+					var btnArray = [
+						{ title: "新建" }
+					];
+					plus.nativeUI.actionSheet({
+						title: "操作",
+						cancel: "取消",
+						buttons: btnArray
+					}, function(e) {
+						var index = e.index;
+						switch(index) {
+							case 0:
+								break;
+							case 1:
+								mui.openWindow({
+									url: "my_project_zljc_list_xz.html",
+									id: "my_project_zljc_list_xz.html",
+									waiting: {
+										autoShow: false
+									},
+									extras: {
+										gcid: gcid,
+										gcmc: gcmc
+									},
+									show: {
+										autoShow: true, //页面loaded事件发生后自动显示
+										aniShow: 'slide-in-right', //页面显示动画
+										duration: '100' //页面动画持续时间
+									},
+									waiting: {
+										autoShow: false, //自动显示等待框						 	
+									}
+								});
+								break;
+						}
+					});
+				});
+
+				//动态改变标题
+				var h1 = document.getElementsByTagName("h1");
+				h1[0].firstChild.nodeValue = gcmc;
+
+				//动态创建质量检查列表的异步
+				mui.ajax(url + 'my_plus/my_zljc_list.php', {
+					data: {
+						gcmc: gcmc,
+						gcid: gcid
+
+					},
+					dataType: 'json',
+					type: 'POST',
+					timeout: 10000,
+					success: function(data) {
+//						alert(data);
+						var length = data.length;
+						if(length > 1) {
+								for(var i = 0; i < length - 1; i++) {
+									var checkId = data[i].id;
+//									alert(checkId);
+									var mc = data[i].名称;
+									var jcbw = data[i].检查部位;
+									var jcrq = data[i].检查日期;
+									var jcry = data[i].检查人员;
+									var sgbz = data[i].施工班组;
+									var zzxm = data[i].组长姓名;
+									var lxdh = data[i].联系电话;
+									var sgrq = data[i].施工日期;
+									var gzms = data[i].工作描述;
+									var sjc = data[i].时间戳;
+									CreateZljcList( mc, gcid, jcbw, jcrq, jcry, sjc, sgbz, zzxm, sgrq, gzms, checkId);
+								}
+							} else {
+								CreateZljcList( '测试', '测试', '测试', '测试', '测试','测试', '测试', '测试','测试','测试');
+							}
+						},
+					error: function(xhr, type, errorThrown) {
+						alert('ajax错误' + type + '---' + errorThrown);
+					}
+				});
+
+				//动态创建质量检查列表
+				var CreateZljcList = function(mc, gcid, jcbw, jcrq, jcry, sjc, sgbz, zzxm, sgrq, gzms, checkId) {
+//					alert(checkId);
+					var scsl = document.getElementById("scsl");
+					var gcid = encodeURI(encodeURI(gcid));
+					var encodeURIGcmc = encodeURI(encodeURI(gcmc));
+					var encodeURIJcbw = encodeURI(encodeURI(jcbw));
+					var encodeURIJcry = encodeURI(encodeURI(jcry));
+					var encodeURISgbz = encodeURI(encodeURI(sgbz));
+					var encodeURIZzxm = encodeURI(encodeURI(zzxm));
+					var mc = "名称：" + mc;
+					var jcbw = "检查部位：" + jcbw;
+					var jcrq = "检查日期：" + jcrq;
+					var jcry = "检查人员：" + jcry;
+					var ul = document.createElement("ul");
+					ul.className = "mui-table-view mui-card my_list my_marginbottom10px";
+					ul.id = "";
+					ul.innerHTML = '<li class="mui-table-view-cell my_backgroundcolor_blue "><a open-type="common" href="my_project_zljc.html?gcmc=' + encodeURIGcmc + '&gcid=' + gcid + '&checkId=' +checkId+ '&sjc=' + sjc + '"><span class="mui-icon mui-icon-gear mui-pull-left my_fontweight my_color_white"></span><p class="mui-ellipsis my_style2 ">' + mc + '</p></a></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">' + jcbw + '</p></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">' + jcrq + '</p></li><li class="mui-table-view-cell"><p class="mui-ellipsis my_style1">' + jcry + '</p></li>';
+					scsl.appendChild(ul);
+				};
+				
+//				//刷新		
+				window.addEventListener('json',function(event){
+					var wobj = plus.webview.currentWebview();
+					wobj.reload(true);
+				});
+			});
+		</script>
+		<script src="../js/setPullToRefresh.js" ></script>
+
+	</body>
+
+</html> 

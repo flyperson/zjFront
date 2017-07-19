@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+			<style type="text/css">
+			.mui-control-content {				
+				bottom: 0px;	
+			}
+			/*媒体查询，横屏效果*/
+			@media only screen and (orientation:landscape ) {
+				.mui-control-content {
+					bottom: 0px;
+					}			
+			}
+			html,
+			body,
+			.mui-content {
+				height: 0px;
+				margin: 0px;
+				background-color: #efeff4;
+			}
+			.mui-control-content {				
+				bottom: 0px;	
+			}
+			h5.mui-content-padded {
+				margin-left: 3px;
+				margin-top: 20px !important;
+			}
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}
+			.ui-alert {
+				text-align: center;
+				padding: 20px 10px;
+				font-size: 16px;
+			}
+			* {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+			}
+			.btn_size{
+				background:#0000FF;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">任务新建</h1>
+		</header>
+		<div class="mui-content">
+			
+			<div id="myform" class="">
+			<div class="mui-content-padded" style="margin: 10px;">
+				<form class="mui-input-group" style="margin-top: 10px;">
+					<div class="mui-input-row">
+						<label>选择类别：</label>
+						<select id="xzlb">
+							<option value ="无" selected="selected">无</option>
+							<option value ="实测实量" id="scsl">实测实量</option>
+							<option value ="观感评价" id="ggpj">观感评价</option>
+						</select>
+					</div>
+				</form>	
+				<form class="mui-input-group" style="margin-top: 10px;">
+					<div class="mui-input-row">						
+						<label>工程类别：</label>
+						<select id="gclb">
+							<!--<option value ="混凝土结构工程" selected="selected">混凝土结构工程</option>
+							<option value ="砌筑工程">砌筑工程</option>
+							<option value ="抹灰工程">抹灰工程</option>
+							<option value ="设备安装工程">设备安装工程</option>-->
+						</select>
+					</div>
+				</form>
+	        </div>
+			</div>
+			<div class="mui-content">
+			<div class="mui-content-padded">
+				<h5>请选择日期：</h5>
+			</div>
+			<div class="mui-content-padded">
+				<form class="mui-input-group">
+				    <div class="mui-input-row">
+				        <label>开始日期：</label>
+				        <input id="star_time" type="text"  class="mui-input-clear" placeholder="请选择开始日期">
+				    </div>
+				    <div class="mui-input-row">
+				        <label>结束日期：</label>
+				        <input id="end_time" type="text" class="mui-input-clear" placeholder="请选择结束日期">
+				    </div>
+				</form>
+				<button id="sure" type="button" class="mui-btn mui-btn-success mui-btn-block btn_size" disabled="disabled">确定</button>
+			</div>
+		</div>
+		</div>			
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.min.js"></script>	
+		<script src="../js/service.js"></script>	
+		<script>
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			mui.plusReady(function() {
+				
+				//定位
+				var xzlb=document.getElementById('xzlb');
+				var gclb=document.getElementById('gclb');
+				var select=document.getElementsByTagName('select');
+				
+				
+				//动态创建内容
+				var createrwmclist=function(gclb){
+					var option=document.createElement('option');
+					option.value=gclb;
+					option.text=gclb;
+					select[1].appendChild(option);
+				};
+				
+				
+				
+				
+				//获取类别后，获取内容
+				xzlb.addEventListener('change',function(){
+					gclb.innerHTML='';     
+					mui.ajax(url+'my_count/my_count_gclb.php',{
+						data:{
+							xzlb:xzlb.value
+						},
+						dataType:'json',
+						type:'post',
+						timeout:10000,
+						success:function(data){
+							var length=data.length;
+							for (var i=0;i<length-1;i++) {
+								var gclb=data[i].工程类别;
+								createrwmclist(gclb);
+							}; 
+						},
+						error:function(xhr,type,errorThrown){
+							//异常处理；
+							//alert('ajax错误'+type);
+							return callback('ajax错误'+type+errorThrown);
+						}
+					});
+					
+				});
+				
+				
+				
+				
+				
+				
+				
+				mui.init();
+				var result = mui('#result')[0];
+				var btns = mui('.btn');
+				
+				//定位
+				var sureButton = document.getElementById('sure');
+				var star_time = document.getElementById("star_time");
+				var end_time = document.getElementById("end_time");
+				
+				//确定按钮的监听事件
+				sureButton.addEventListener('tap', function(event) {
+					//跳转函数
+					transfer();
+				});
+				//跳转函数
+				var transfer = function() {
+//					alert(gclb.value);
+					mui.openWindow({
+						url: 'my_count_two.html', 
+						id: 'my_count_two',
+						styles: {
+							hardwareAccelerated:false
+						},
+						extras:{
+							gclb:gclb.value,
+							star:star_time.value,
+							end:end_time.value
+						},
+						show:{
+							autoShow:true,//页面loaded事件发生后自动显示
+							aniShow:'slide-in-right',//页面显示动画
+							duration:'100'//页面动画持续时间
+						},
+						waiting:{
+							autoShow:false,//自动显示等待框
+						},
+					});
+				}
+				
+				//原生开始日期与结束日期
+//				star_time.addEventListener('tap',function(){
+//					plus.nativeUI.pickDate( function(e){
+//					var d=e.date;
+//                  star_time.value = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+//				  });
+//				});
+//				end_time.addEventListener('tap',function(){
+//					plus.nativeUI.pickDate( function(e){
+//					var d=e.date;
+//                  end_time.value = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+//				  });
+//				})
+				//李德戈景-判断起始日期不能大于截止日期
+				star_time.addEventListener('tap', function() {
+					var dDate = new Date();
+					plus.nativeUI.pickDate(function(e) {
+						var d = e.date;
+						star_time.value=d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+						if (star_time.value&&end_time.value) {
+							var gksrq=star_time.value;
+							var gjsrq=end_time.value;
+							var xgksrq = new Date(Date.parse(gksrq.replace(/-/g, "/")));
+							var xgksrq = xgksrq.getTime();
+							var xgjsrq = new Date(Date.parse(gjsrq.replace(/-/g, "/")));
+							var xgjsrq = xgjsrq.getTime();
+							if (xgjsrq>=xgksrq) {
+								sureButton.disabled=false;
+							}else{
+								alert('起始日期不能大于结束日期！');
+								sureButton.disabled=true;
+							}
+						}
+						
+					}, function(e) {
+						//alert(e);
+					}, {
+						title: "请选择日期",
+					});
+				});
+				end_time.addEventListener('tap', function() {
+					var dDate = new Date();
+					plus.nativeUI.pickDate(function(e) {
+						var d = e.date;
+						end_time.value=d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+						if (star_time.value&&end_time.value) {
+							var gksrq=star_time.value;
+							var gjsrq=end_time.value;
+							var xgksrq = new Date(Date.parse(gksrq.replace(/-/g, "/")));
+							var xgksrq = xgksrq.getTime();
+							var xgjsrq = new Date(Date.parse(gjsrq.replace(/-/g, "/")));
+							var xgjsrq = xgjsrq.getTime();
+							if (xgjsrq>=xgksrq) {
+								sureButton.disabled=false;
+							}else{
+								alert('起始日期不能大于结束日期！');
+								sureButton.disabled=true;
+							}
+						}
+						
+					}, function(e) {
+						//alert(e);
+					}, {
+						title: "请选择日期",
+					});
+				});
+				
+			});
+			
+		</script>
+		<script src="../js/setPullToRefresh.js" ></script>
+	</body>
+
+</html>

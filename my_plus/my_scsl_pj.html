@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>实测实量</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/my_css.css">
+		<!--选择事件弹出的界面样式-->
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<style type="text/css">
+			.chart {
+				height: 500px;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			h5 {
+				margin-top: 30px;
+				font-weight: bold;
+			}
+			
+			h5:first-child {
+				margin-top: 15px;
+			}
+			
+			.btn_size {
+				width: 90px;
+				height: 34px;
+				background: #0000FF;
+				color: white;
+			}
+			
+			.mui-control-content {
+				bottom: 0px;
+			}
+			
+			.my_table {
+				float: left;
+				text-align: center;
+			}
+			
+			.my_th_weight {
+				font-weight: bolder;
+			}
+			
+			.my_td_width30 {
+				width: 30%;
+			}
+			
+			.my_td_width40 {
+				width: 35%;
+			}
+			
+			.my_td_width50 {
+				width: 70%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">评价</h1>
+		</header>
+		<div class="mui-content">
+			<ul id="tjfx" class="mui-table-view">
+				<li class="mui-table-view-cell my_th_weight mui-disabled">
+					<div class="my_table my_td_width30">检查项</div>
+					<div class="my_table my_td_width40">实测实量评分</div>
+					<div class="my_table my_td_width40">观感效果评分</div>
+				</li>
+				<li class="mui-table-view-cell  mui-disabled">
+					<div class="my_table my_td_width30">权重</div>
+					<div class="my_table my_td_width40">50%</div>
+					<div class="my_table my_td_width40">50%</div>
+				</li>
+				<li class="mui-table-view-cell  mui-disabled">
+					<div class="my_table my_td_width30">检查表分数</div>
+					<div id="scslpf" class="my_table my_td_width40"></div>
+					<div id="ggpjpf" class="my_table my_td_width40"></div>
+				</li>
+				<li class="mui-table-view-cell  mui-disabled">
+					<div class="my_table my_td_width30">实得分数</div>
+					<div id="scsdfs" class="my_table my_td_width40"></div>
+					<div id="ggsdfs" class="my_table my_td_width40"></div>
+				</li>
+				<li class="mui-table-view-cell  mui-disabled">
+					<div class="my_table my_td_width30">综合得分</div>
+					<div id="zhdf" class="my_table my_td_width50"></div>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/echarts.js"></script>
+		<script src="../js/service.js"></script>
+		<script>
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				var gcmc = self.gcmc;
+				var sjc = self.sjc;
+				var gcid = self.gcid;
+				var checkId = self.checkId;
+
+				//动态获取评分
+				mui.ajax(url + 'my_plus/my_project_pj.php', {
+					data: {
+						sjc: sjc
+
+					},
+					dataType: 'json',
+					type: 'POST',
+					timeout: 10000,
+					success: function(data) {
+						var length = data.length;
+						var a1 = 0;
+						var b1 = 0;
+						var c1 = 0;
+						var a2 = 0;
+						var b2 = 0;
+						var c2 = 0;
+						var d = 0;
+						for(var i = 0; i < length - 1; i++) {
+							var hgl = data[i].合格率;
+							var xmlb = data[i].项目类别;
+							var scgg = data[i].实测观感;
+							hgl = hgl.replace(/[^0-9.]/ig, "");
+							hgl = Number(hgl);
+							if(scgg == '实测实量') {
+								b1 = b1 + 1;
+								a1 = hgl + a1;
+							} else if(scgg == '观感评价') {
+								b2 = b2 + 1;
+								a2 = hgl + a2;
+							} else {
+
+							} 
+							createpf(hgl, xmlb, scgg, a1, b1, c1, a2, b2, c2, d, i);
+						}
+						var sczhpf = scsdfs.innerHTML.replace(/[^0-9.]/ig, "");
+						var ggzhpf = ggsdfs.innerHTML.replace(/[^0-9.]/ig, "");
+						sczhpf = Number(sczhpf);
+						ggzhpf = Number(ggzhpf);
+						
+//						alert(ggzhpf);
+						zhdf.innerHTML = (sczhpf + ggzhpf).toFixed(2) + '%';
+					},
+					error: function(xhr, type, errorThrown) {
+						alert('ajax错误' + type + '---' + errorThrown);
+					}
+				});
+
+				//将评分获取至表格中
+				function createpf(hgl, xmlb, scgg, a1, b1, c1, a2, b2, c2, d, i) {
+					if(scgg == '实测实量') {
+						c1 = a1 / b1;
+						scslpf.innerHTML = c1 + '%';
+						scsdfs.innerHTML = c1 / 2 + '%';
+					} else if(scgg == '观感评价') {
+						c2 = a2 / b2;
+						ggpjpf.innerHTML = c2 + '%';
+						ggsdfs.innerHTML = c2 / 2 + '%';
+					} else {
+
+					}
+					//					zhdf.innerHTML = ()/i +'%';
+				}
+			});
+		</script>
+		<script src="../js/setPullToRefresh.js"></script>
+	</body>
+
+</html>

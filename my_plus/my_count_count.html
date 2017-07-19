@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>实测实量</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">		
+		<link rel="stylesheet" href="../css/mui.min.css">	
+		<link rel="stylesheet" href="../css/my_css.css">
+		<!--选择事件弹出的界面样式-->
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<style type="text/css">
+			.chart {
+				height: 500px;
+				margin: 0px; 
+				padding: 0px; 
+			}
+			h5 {
+				margin-top: 30px;
+				font-weight: bold;
+			}
+			h5:first-child {
+				margin-top: 15px;
+			}
+			.btn_size{
+				width: 90px; 
+				height: 34px;
+				background:#0000FF;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">统计分析</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded">
+				<h5>&nbsp;</h5>
+				<button type="button" class="mui-btn btn_size">地区</button>
+				<button type="button" class="mui-btn btn_size">施工状态</button>
+				<button type="button" class="mui-btn btn_size">形象进度</button>
+			</div>
+			
+			<div id="bar" class="chart"></div>
+
+		</div>		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/echarts.js"></script> 
+		<script src="../js/service.js"></script>
+		<script> 
+			mui.init({ 
+				swipeBack:true //启用右滑关闭功能
+			});
+			
+	
+	    // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('bar'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '在建项目(施工状态)统计图',
+                left:'center',
+                subtext: '统计日期2017年3月15日',
+
+                
+            },
+            tooltip: {
+            	
+            },
+            legend: {
+                
+            },
+            xAxis: {
+                data: ["施工中","停工","地工","未开工","其他"]
+            },
+            yAxis: {
+            	 name: '单位/个',
+            	 
+
+            },
+            series: [{
+                name: '在建项目统计',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10],
+              
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+		</script>
+		<script src="../js/setPullToRefresh.js" ></script>
+	</body>
+</html>

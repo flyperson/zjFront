@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="mui-content">
+		<ul class="mui-table-view mui-table-view-chevron my_list" id="projectlist">
+			<li id="info" class="mui-table-view-cell mui-media">
+				<a class="mui-navigate-right">
+					<img class="mui-media-object mui-pull-left" src="images/xzmc.png">
+					<div class="mui-media-body">
+						空
+					<p class='mui-ellipsis'>xxx施工单位</p>
+					</div>
+				</a>
+		</li>
+	</ul>
+</div>
+	</body>
+		<script src="js/mui.min.js"></script>
+		<script src="js/service.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			mui.plusReady(function(){
+			//获取传值
+		var self = plus.webview.currentWebview();
+			var xmgc=function(id,project,unit){
+				
+				var id=id;
+				var project=project;
+				var unit=unit;
+				
+				var project_c=encodeURI(encodeURI(project));
+				var unit_1=encodeURI(encodeURI(unit));
+//				alert(unit_1)
+				var ul=document.getElementsByTagName("ul");
+				var li=document.createElement("li");
+				li.id="info"; 
+				li.className="mui-table-view-cell mui-media";
+				li.innerHTML='<a class="mui-navigate-right" href="my_team/team_in.html?id='+id+'&project='+project_c+'&unit='+unit_1+'"><img class="mui-media-object mui-pull-left" src="images/xzmc.png"><div class="mui-media-body">'+project+'<p class="mui-ellipsis">'+unit+'</p></div></a>';
+				ul[0].appendChild(li);	
+			};
+			mui.ajax(url + 'team.php',{
+				data:{ 
+					
+				 },
+				dataType:'json',
+				type:'POST',
+				timeout:10000,
+				success:function(data){
+					var length=data.length;
+					var ul=document.getElementsByTagName("ul");
+					if(length>0){
+						ul[0].innerHTML='';
+						for (var i=0;i<length-1;i++) {
+							var id = data[i].项目id;
+							var project = data[i].项目名称;
+							var unit = data[i].地区;
+							xmgc(id,project,unit);
+					    }
+				    }else{
+						
+					}
+				},
+      			error:function(xhr,type,errorThrown){
+//					alert('ajax错误'+type+'---'+errorThrown);
+				} 
+			});
+			var aniShow = "pop-in";
+			
+			//主列表点击事件
+			mui('.my_list').on('tap','a',function(){
+				var id='my_team/team_in.html';
+				var href=this.href;
+				var webview_style = {
+					popGesture: "close"
+				};
+				
+				mui.openWindow({
+					id: id,
+					url: href,
+					styles: webview_style,
+					extras:{
+						
+					},
+					show: {
+						aniShow: aniShow
+					},
+					waiting: {
+						autoShow: false
+						
+					}
+				});
+			});
+		});
+		</script>
+	
+
+</html>
