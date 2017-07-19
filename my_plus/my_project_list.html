@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>实测实量</title>
+		<title>华西安检</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -14,7 +14,7 @@
 				margin-top: 10px;
 			}
 			
-			.paddingleft34px { 
+			.paddingleft34px {
 				padding-left: 34px;
 			}
 			
@@ -34,15 +34,19 @@
 			.mui-popover .mui-popover-arrow {
 				display: none !important;
 			}
+			
+			.my_kapianjianju {
+				margin-top: 10px;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a id="my_popover" class="mui-icon mui-icon-search mui-pull-right"></a>
 			<h1 class="mui-title">我的工程</h1>
 		</header>
-		
 		<div class="mui-content my_none">
 			<div id="myform" class="">
 				<div class="mui-content-padded" style="margin: 5px;">
@@ -79,32 +83,33 @@
 				</div>
 			</div>
 		</div>
-		
-		<div id="gongcheng" class="mui-content ">
-		
+		<div id="gongcheng" class="mui-content">
+
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/service.js"></script>
-		<script>
+		<script src="../js/my_project_list_search.js"></script>
+		<script type="text/javascript">
+			window.addEventListener('zggl', function(event) {
+
+			});
 			mui.plusReady(function() {
-				
 				var self = plus.webview.currentWebview();
 				mobile = self.mobile;
 				userid = self.zhi;
-				bumen = self.bumen;
-				
-				var a = document.getElementsByTagName("a");
-				
+				bumen = self.bumen1;
+// 				alert(bumen);
+
 				var phone = document.getElementById("phone");
 				var gcidCf = document.getElementById("gcidCf");
 				var nameXm = document.getElementById("nameXm");
 				var gongcheng = document.getElementById("gongcheng");
 				var bumen1 = document.getElementById("bumen1");
 				var qdTime = document.getElementById("qdTime");
-				
+
 				bumen1.value = bumen;
 				phone.value = mobile;
-				
+
 				//获取当前时间
 				var date = new Date();
 				var year = date.getFullYear(); //获取当前年份
@@ -119,34 +124,45 @@
 					var time01 = year + "-%" + mon + "-" + da;
 				}
 				qdTime.value = time01;
-				
-				//动态创建
-				var myproject = function(id, gcname, dq, xmlb, gczt, i) {
-					//					alert(gcname);
+
+				//动态创建函数
+				var myproject = function(id, gcmc, dq, xmlb, gczt, i, dqsheng, dqshi,gcwz) {
+					var num = i;
 					var id = id;
-					var gcmc = gcname;
+					var gcmc = gcmc;
 					var dq = dq;
 					var xmlb = xmlb;
 					var gczt = gczt;
-					var num = i;
-					//				alert(gcmc);
+					var dqsheng = dqsheng;
+					var dqshi = dqshi;
+					var gcwz = gcwz;
+//					alert(gcwz);
 
 					var gcmc_c = encodeURI(encodeURI(gcmc));
 					var dq_c = encodeURI(encodeURI(dq));
 					var xmlb_c = encodeURI(encodeURI(xmlb));
 					var gczt_c = encodeURI(encodeURI(gczt));
+					var dqsheng_c = encodeURI(encodeURI(dqsheng));
+					var dqshi_c = encodeURI(encodeURI(dqshi));
+					var gcwz_c = encodeURI(encodeURI(gcwz));
 
-					var zhuyi = "本工程存在3项工程通病超警戒";
-					var chakan = "本月存在项日志信息卡片";
+					var zhuyi = "注意：本工程存在隐患项延期整改";
+					var chakan = "查看本工程全部隐患";
+
 					var diqu = "地区：" + dq;
 					var an1 = '点击查看';
-					var an2 = '进入工程';
+					if(mobile == "13603070333" || mobile == "13826467128" || mobile == "13632665565" || mobile == "13510881338" || mobile == "15876092583") {
+						var an2 = '查看签到';
+					} else {
+						var an2 = '人员签到';
+					}
+					var an3 = '进入工程';
 
 					var gongcheng = document.getElementById("gongcheng");
 					var div = document.createElement("div");
-					div.className = "mui-mui-table-view my_list mui-card margintop10px";
+					div.className = "mui-table-view my_list mui-card margintop10px";
 					div.style = "margin-top: 10px";
-					div.id = "div" + id + "num" + i; 
+					div.id = "div" + id + "num" + i;
 
 					var muicontent = document.getElementsByClassName('mui-content');
 					var div = document.createElement('div');
@@ -159,7 +175,7 @@
 					li.className = 'mui-table-view-cell mui-media my_backgroundcolor_blue my_color_white';
 					ul.appendChild(li);
 					var a = document.createElement('a');
-					a.href = "my_project.html?id=" + id + "&gcmc=" + gcmc_c + "&dq=" + dq_c + "&xmlb=" + xmlb_c + "&gczt=" + gczt_c+ "&mobile=" + mobile;
+					a.href = "my_project.html?id=" + id + "&gcmc=" + gcmc_c + "&dq=" + dq_c + "&xmlb=" + xmlb_c + "&gczt=" + gczt_c + "&mobile=" + mobile + "&sheng=" + dqsheng_c + "&shi=" + dqshi_c;
 					li.appendChild(a);
 					var img = document.createElement('img');
 					img.className = 'mui-media-object mui-pull-right';
@@ -178,7 +194,7 @@
 					var p2 = document.createElement('p');
 					p2.className = 'mui-ellipsis my_underline my_color_white';
 					div2.appendChild(p2);
-					var txt3 = document.createTextNode(an2);
+					var txt3 = document.createTextNode(an3);
 					p2.appendChild(txt3);
 
 					var li2 = document.createElement('li');
@@ -192,7 +208,8 @@
 					var span = document.createElement('span');
 					span.className = 'mui-icon mui-icon-spinner-cycle mui-pull-left';
 					div3.appendChild(span);
-					var button = document.createElement('button');	
+					var button = document.createElement('button');
+					button.id = "ck" + id;
 					button.className = 'mui-btn mui-btn-warning mui-pull-right';
 					button.type = 'button';
 					div3.appendChild(button);
@@ -203,8 +220,12 @@
 					div3.appendChild(p3);
 					var txt5 = document.createTextNode(zhuyi);
 					p3.appendChild(txt5);
+
+					var li3 = document.createElement('li');
+					li3.className = 'mui-table-view-cell mui-media';
+					ul.appendChild(li3);
 					var a3 = document.createElement('a');
-					li2.appendChild(a3);
+					li3.appendChild(a3);
 					var div4 = document.createElement('div');
 					div4.className = 'mui-media-body';
 					a3.appendChild(div4);
@@ -212,49 +233,264 @@
 					span2.className = 'mui-icon mui-icon-info mui-pull-left';
 					div4.appendChild(span2);
 					var button2 = document.createElement('button');
+					button2.id = "qd" + id;
 					button2.className = 'mui-btn mui-btn-warning mui-pull-right';
 					button2.type = 'button';
 					div4.appendChild(button2);
-					var txt6 = document.createTextNode(an1);
-					button2.appendChild(txt6);
-					var p4 = document.createElement('p');
-					p4.className = 'mui-ellipsis my_fontsize my_color_blue my_paddingleft';
-					div4.appendChild(p4);
-					var txt7 = document.createTextNode(chakan);
-					p4.appendChild(txt7);
+					var txt8 = document.createTextNode(an2);
+					button2.appendChild(txt8);
+					var p6 = document.createElement('p');
+					p6.className = 'mui-ellipsis my_fontsize my_color_blue my_paddingleft';
+					div4.appendChild(p6);
+					var txt9 = document.createTextNode(chakan);
+					p6.appendChild(txt9);
+
+					//点击查看
+					button.addEventListener('tap', function() {
+						//alert(id+"  "+gcmc);
+						var webview_style = {
+							popGesture: "close",
+							hardwareAccelerated: false
+						};
+						mui.openWindow({
+							id: "djck",
+							url: "my_plus_wdgc_djck.html",
+							styles: webview_style,
+							extras: {
+								gcid: id,
+								gcmc: gcmc
+							},
+							show: {
+								aniShow: "pop-in"
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					});
+					//检查签到
+					button2.addEventListener('tap', function() {
+						var gcidCf = document.getElementById("gcidCf");
+						var id = this.id;
+						var btngcid = id.slice(2);
+						gcidCf.value = btngcid;
+						//判断是不是查看签到
+						if(mobile == "13603070333" || mobile == "13826467128" || mobile == "13632665565" || mobile == "13510881338" || mobile == "15876092583") {
+							checkSign(btngcid, gcmc);
+						} else {
+							qiandao(btngcid, gcmc,gcwz,xmlb,mobile);
+							//点击过后就改变按钮的样式
+							var buttonId = document.getElementById(id);
+							buttonId.innerText = "您已点击";
+							//判断是否签到过
+							qiandaoPd(btngcid);
+							//getPos();
+						}
+					});
 				}
+
+//人员签到
+               var qiandao = function(gcid, gcmc,gcwz,xmlb,mobile) {
+					var webview_style = {
+						popGesture: "close",
+						hardwareAccelerated: false
+					};
+					mui.openWindow({
+						id: gcid,
+						url: "../attention_plus/attention_ewm.html",
+						styles: webview_style,	
+						extras: {
+							gcid: gcid,
+							gcmc: gcmc,
+							gcwz: gcwz,
+							xmlb:xmlb,
+							mobile:mobile,
+							bumen:bumen
+						},
+						show: {
+							aniShow: "pop-in"
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				};
+
+				//查看签到结果
+				var checkSign = function(gcid, gcmc) {
+					var webview_style = {
+						popGesture: "close",
+						hardwareAccelerated: false
+					};
+					mui.openWindow({
+						id: gcid,
+						url: "checkSign.html",
+						styles: webview_style,
+						extras: {
+							gcid: gcid,
+							gcmc: gcmc
+						},
+						show: {
+							aniShow: "pop-in"
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				};
+
+				//判断是否签到
+				var qiandaoPd = function(gcid) {
+					//签到前验证当前日期是否签到过
+					mui.ajax(url + 'attention_plus/attention_ewm.php', {
+						data: {
+							flag: 'select',
+							gcid: gcid, //工程id
+							gcmc: "", //工程名称
+							sjc: "", //时间戳
+							sji: phone.value, //手机
+							bumen: "", //部门
+							xm: "", //姓名
+							qdTime: qdTime.value
+						},
+						dataType: 'json',
+						type: 'post',
+						timeout: 10000,
+						success: function(data) {
+							//console.log(data);
+							if(data.result == 'OK') {
+								alert("您今日已签到过一次,今日内不用再次签到！");
+							} else {
+								getPos();
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+//							return callback('ajax错误' + type + errorThrown);
+						}
+					});
+
+				};
+
 				//异步传值
 				mui.ajax(url + 'my_plus/my_project_list.php', {
 					data: {
-
+						mobile: mobile,
+						bumen: bumen
 					},
 					dataType: 'json',
 					type: 'POST',
 					timeout: 10000,
 					success: function(data) {
+						//alert(data);
 						var length = data.length;
 						if(length > 1) {
 							for(var i = 0; i < length - 1; i++) {
 								var id = data[i].id;
-								var gcname = data[i].工程名称;
+								var gcmc = data[i].工程名称;
 								var dq = data[i].地区;
 								var xmlb = data[i].项目类别;
 								var gczt = data[i].工程状态;
-								myproject(id, gcname, dq, xmlb, gczt, i);
-								//	alert(gcname);
+								var dqsheng = data[i].地区省;
+								var dqshi = data[i].地区市;
+								var gcwz = data[i].地区;
+								myproject(id, gcmc, dq, xmlb, gczt, i, dqsheng, dqshi,gcwz);
 							}
 						} else {
 							alert("暂无数据");
 						}
 					},
 					error: function(xhr, type, errorThrown) {
-						alert('ajax错误' + type + '---' + errorThrown);
+						//alert('ajax错误'+type+'---'+errorThrown);
 					}
-
 				});
+
+				//异步获取手机对应的人员姓名
+				mui.ajax(url + 'attention_plus/attention_ewm.php', {
+					data: {
+						flag: 'wqd',
+						sji: mobile,
+						gcid: '', //工程id
+						gcmc: '', //工程名称
+						sjc: '', //时间戳
+						xm: '', //姓名
+						bumen: '' //部门
+					},
+					dataType: 'json',
+					type: 'post',
+					timeout: 10000,
+					success: function(data) {
+						//alert(data);
+						var length = data.length;
+						if(length > 1) {
+							for(var i = 0; i < length - 1; i++) {
+								nameXm.value = data[i].姓名;
+							}
+						} else {}
+					},
+					error: function(xhr, type, errorThrown) {
+//						return callback('ajax错误' + type + errorThrown);
+					}
+				});
+
+				//获取设备位置信息
+				var getPos = function() {
+					plus.geolocation.getCurrentPosition(geoInf, function(e) {
+						alert("获取定位位置信息失败：" + e.message);
+					}, {
+						geocode: true,
+						provider: 'amap'
+					});
+				};
 			});
+
+			function geoInf(position) {
+				var codns = position.coords; //获取地理坐标信息；
+				var lat = codns.latitude; //获取到当前位置的纬度；
+				var longt = codns.longitude; //获取到当前位置的经度
+				//alert(lat+"  "+longt);
+				var weidu = document.getElementById("weidu");
+				var jingdu = document.getElementById("jingdu");
+				var phone = document.getElementById("phone");
+				var gcidCf = document.getElementById("gcidCf");
+				var nameXm = document.getElementById("nameXm");
+				var bumen1 = document.getElementById("bumen1");
+				weidu.value = lat;
+				jingdu.value = longt;
+				//alert(gcidCf.value);
+
+				//自动添加当前时间戳,作为这个新建任务的唯一标识存到数据库，附件上传时会用到
+				var myDate = new Date();
+				var mytime = myDate.getTime();
+				//alert(mytime);
+				//异步上传数据
+				mui.ajax(url + 'my_plus/my_plus_ryqd.php', {
+					data: {
+						lat: lat,
+						longt: longt,
+						phone: phone.value,
+						gcid: gcidCf.value,
+						name: nameXm.value,
+						bumen: bumen1.value,
+						sjc: mytime
+					},
+					dataType: 'json',
+					type: 'post',
+					timeout: 10000,
+					success: function(data) {
+						//						alert(data);
+						if(data.result == 'success') {
+							alert(data.resultWc);
+							//return callback();
+						} else {
+							//return callback('服务器返回error');	
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						//return callback('ajax错误'+type+errorThrown);
+					}
+				});
+			}
 		</script>
-		<script src="../js/setPullToRefresh.js"></script>
 	</body>
 
 </html>

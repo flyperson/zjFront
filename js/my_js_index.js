@@ -33,9 +33,11 @@ mui.plusReady(function() {
 	//获取传值
 	var self = plus.webview.currentWebview();
 	var mobile = self.mobile;
+	var bumen = self.bumen;
 	//传值
 	var subpage_extras = {
-		mobile:mobile
+		mobile:mobile,
+		bumen:bumen
 	};	
 	setTimeout(function() {
 		//关闭等待框

@@ -78,6 +78,9 @@ var initTemplates = function() {
 if (mobile='') {
 	mobile='';
 }
+if (bumen='') {
+	bumen='';
+}
 mui('.my_list').on('tap', 'a', function() {	
 	
 	var id = this.getAttribute('href');
@@ -102,7 +105,8 @@ mui('.my_list').on('tap', 'a', function() {
 			styles: webview_style,
 			extras:{
 				zhi:"www",
-				mobile:mobile
+				mobile:mobile,
+				bumen1:bumen1
 			},
 			show: {		
 				//autoShow:false,
