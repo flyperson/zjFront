@@ -372,6 +372,7 @@
 
 					mui.ajax(url + 'my_plus/checkSign.php', {
 						data: {
+							my_flag:"checksign",
 							star_time: star_time.value,
 							end_time: end_time.value,
 							name:staff.value
@@ -392,8 +393,8 @@
 						},
 						error: function(xhr, type, errorThrown) {
 							//异常处理；
-							//alert('ajax错误'+type);
-							return callback('ajax错误' + type + errorThrown);
+							alert('ajax错误'+type);
+//							return callback('ajax错误' + type + errorThrown);
 						}
 					});
 				}

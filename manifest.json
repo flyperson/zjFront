@@ -976,7 +976,12 @@
 				"resources": [
 					"js/common.js",
 					"js/immersed.js",
-					"css/my_project_fhys_xz.css"
+					"css/my_project_fhys_xz.css",
+					"js/service.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -986,6 +991,13 @@
 					"js/charCode.js"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"my_count/my_zxhz.html": {
+				"resources": [],
+				"refer": [
+					"my_count/my_zxhz_count.html"
+				],
 				"priority": 0
 			}
 		},

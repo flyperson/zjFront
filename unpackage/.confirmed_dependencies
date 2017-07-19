@@ -717,12 +717,22 @@
 		"resources": [
 			"js/common.js",
 			"js/immersed.js",
-			"css/my_project_fhys_xz.css"
+			"css/my_project_fhys_xz.css",
+			"js/service.js",
+			"js/mui.min.js",
+			"css/my_css.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
 		]
 	},
 	"attention_plus/attention_ewm.html": {
 		"resources": [
 			"js/charCode.js"
+		]
+	},
+	"my_count/my_zxhz.html": {
+		"refer": [
+			"my_count/my_zxhz_count.html"
 		]
 	}
 }
