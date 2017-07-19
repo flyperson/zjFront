@@ -273,6 +273,7 @@
 					//人员签到信息获取
 					mui.ajax(url + 'my_plus/checkSign.php', {
 						data: {
+							my_flag:"sign",
 							gcid: gcid,
 							star_time: star_time.value,
 							end_time: end_time.value
