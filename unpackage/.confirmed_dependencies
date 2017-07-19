@@ -34,7 +34,8 @@
 			"js/mui.min.js",
 			"css/my_css.css",
 			"fonts/mui.ttf",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"images/zltj.png"
 		],
 		"refer": [
 			"my_plus/my_project_list.html",
@@ -42,7 +43,8 @@
 			"my_plus/my_count.html",
 			"my_log/daily_record.html",
 			"my_count/my_count_one.html",
-			"my_document/my_document.html"
+			"my_document/my_document.html",
+			"my_count/my_count.html"
 		]
 	},
 	"login.html": {
@@ -685,11 +687,28 @@
 	"leftmenu.html": {
 		"refer": [
 			"setting.html"
+		],
+		"resources": [
+			"css/mui.min.css"
 		]
 	},
 	"my_plus/my_project_zhcx.html": {
 		"resources": [
 			"js/chart.js"
+		]
+	},
+	"my_count/my_count.html": {
+		"refer": [
+			"my_count/my_zxhz.html"
+		]
+	},
+	"my_count/my_zxhz.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/service.js",
+			"js/mui.min.js",
+			"css/my_css.css",
+			"fonts/mui.ttf"
 		]
 	}
 }
