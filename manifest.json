@@ -169,9 +169,9 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/Administrator/Desktop/微信图片_20170526143823.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "G:/迅雷下载/2 (1).png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "G:/迅雷下载/2 (1).png"
+					"hdpi": "D:/phpstudy/WWW/zjFront/images/start_images/splah480X762.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "D:/phpstudy/WWW/zjFront/images/start_images/splash720X1242.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "D:/phpstudy/WWW/zjFront/images/start_images/splash1080X1882.png"
 				}
 			}
 		}
