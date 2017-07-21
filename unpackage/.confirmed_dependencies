@@ -681,7 +681,13 @@
 			"my_plus/my_change_list.html",
 			"js/common.js",
 			"js/immersed.js",
-			"images/zpxz.jpg"
+			"images/zpxz.jpg",
+			"js/service.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"css/my_project_fhys_xz.css"
 		],
 		"refer": [
 			"my_plus/my_change_list.html",
