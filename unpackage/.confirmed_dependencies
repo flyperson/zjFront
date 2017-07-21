@@ -727,7 +727,12 @@
 	},
 	"attention_plus/attention_ewm.html": {
 		"resources": [
-			"js/charCode.js"
+			"js/charCode.js",
+			"js/service.js",
+			"js/mui.min.js",
+			"css/my_css.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
 		]
 	}
 }

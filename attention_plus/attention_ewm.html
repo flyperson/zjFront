@@ -144,6 +144,7 @@
 			var gcwz = self.gcwz;
 			mobile = self.mobile;
 			bumen = self.bumen;
+			
 //		 alert(mobile);
 			
 			var gcidHtml=document.getElementById("gcidHtml"); //工程id
@@ -296,7 +297,13 @@
 							qdztXs.classList.remove("my_none");
 							qdzt.value="已签到";
 						} else{
-							qiandao();
+							plus.geolocation.getCurrentPosition(getlt, function(e) {
+									alert("获取定位位置信息失败：" + e.message);
+								}, {
+									geocode: true,
+									provider: 'amap'
+							});
+//							qiandao();
 						}
 	            	},
 					error:function(xhr,type,errorThrown){
@@ -305,7 +312,15 @@
 				});
 				
 			});
-			var qiandao=function(){
+			//添加经纬度的签到
+			function getlt(position){
+				var codns = position.coords; //获取地理坐标信息；
+				var lat_my = codns.latitude; //获取到当前位置的纬度；
+				var longt_my = codns.longitude; //获取到当前位置的经度
+				lt = longt_my+","+lat_my;
+				qiandao(lt);
+			}
+			var qiandao=function(lt){
 				mui.ajax(url+'attention_plus/attention_ewm.php',{
 					data:{
 						flag:'update',
@@ -317,7 +332,8 @@
 						sji:shj.value, //手机
 						bumen:bumen2.value, //部门
 						xm:xming.value, //姓名
-						qdTime:qdTime.value
+						qdTime:qdTime.value,
+						lt:lt//经纬度
 					},
 					dataType:'json',
 					type:'post',

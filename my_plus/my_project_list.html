@@ -288,9 +288,9 @@
 						}
 					});
 				}
-
 //人员签到
                var qiandao = function(gcid, gcmc,gcwz,xmlb,mobile) {
+					
 					var webview_style = {
 						popGesture: "close",
 						hardwareAccelerated: false
@@ -305,7 +305,7 @@
 							gcwz: gcwz,
 							xmlb:xmlb,
 							mobile:mobile,
-							bumen:bumen
+							bumen:bumen,
 						},
 						show: {
 							aniShow: "pop-in"
@@ -457,7 +457,7 @@
 				weidu.value = lat;
 				jingdu.value = longt;
 				//alert(gcidCf.value);
-
+//				alert(lat+"/"+longt);
 				//自动添加当前时间戳,作为这个新建任务的唯一标识存到数据库，附件上传时会用到
 				var myDate = new Date();
 				var mytime = myDate.getTime();
@@ -486,6 +486,7 @@
 						}
 					},
 					error: function(xhr, type, errorThrown) {
+//						alert("ajax error!");
 						//return callback('ajax错误'+type+errorThrown);
 					}
 				});
