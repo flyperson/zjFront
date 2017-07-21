@@ -310,7 +310,7 @@
 							//xclb.value=data[i].巡查类别;
 							xclb2.value=data[i].巡查类别;
 							tzdbh.value=data[i].通知单编号;
-							//jcdw.value=data[i].检查单位;
+							jcdw.value=data[i].检查单位;
 							jcdwLook.value=data[i].检查单位;
 							jcdx.value=data[i].检查对象;
 							
@@ -749,19 +749,20 @@
 				//修改后通知单上传
 				function ckcgsc(){
 					//alert("22");
+//					alert(jcdwLook.value);
 					mui.ajax(url+'my_plus/my_change_ckcg.php',{
 						data:{
 							jccj:jccj.value,
 							xclb:xclb.value,
 							tzdbh:tzdbh.value,
-							jcdw:jcdw.value,
+							jcdw:jcdwLook.value,
 							jcdx:jcdx.value,
 							jcrq:jcrq.value,
 							wzzt:wzzt.value,
 							czgqx:czgqx.value,
 							sjc:sjc.value
 						},
-						//dataType:'JSON',
+						dataType:'JSON',
 						type:'POST', 
 						timeout:10000,
 						success:function(data){
