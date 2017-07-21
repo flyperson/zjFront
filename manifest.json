@@ -339,7 +339,8 @@
 					"my_plus/my_project_rzxx.html",
 					"my_plus/my_project_scsl.html",
 					"my_plus/my_project_ggpj.html",
-					"my_plus/my_project_zljc_list.html"
+					"my_plus/my_project_zljc_list.html",
+					"attention_plus/attention_ewm.html"
 				],
 				"priority": 0
 			},
@@ -974,6 +975,13 @@
 					"js/mui.min.js",
 					"css/my_css.css",
 					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"attention_plus/attention_ewm.html": {
+				"resources": [
+					"js/charCode.js"
 				],
 				"refer": [],
 				"priority": 0

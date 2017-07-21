@@ -96,7 +96,8 @@
 			"my_plus/my_project_rzxx.html",
 			"my_plus/my_project_scsl.html",
 			"my_plus/my_project_ggpj.html",
-			"my_plus/my_project_zljc_list.html"
+			"my_plus/my_project_zljc_list.html",
+			"attention_plus/attention_ewm.html"
 		]
 	},
 	"my_plus/my_project.html": {
@@ -722,6 +723,11 @@
 	"reg.html": {
 		"resources": [
 			"fonts/mui.ttf"
+		]
+	},
+	"attention_plus/attention_ewm.html": {
+		"resources": [
+			"js/charCode.js"
 		]
 	}
 }
