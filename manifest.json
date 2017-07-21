@@ -872,7 +872,15 @@
 			},
 			"my_plus/my_change_tkgl.html": {
 				"resources": [
-					"js/my_js_wztmtpsc_xz.js"
+					"js/my_js_wztmtpsc_xz.js",
+					"js/service.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/my_css.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/immersed.js",
+					"css/my_project_fhys_xz.css"
 				],
 				"refer": [
 					"my_plus/my_change_wztmbj2.html"

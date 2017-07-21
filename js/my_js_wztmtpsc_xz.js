@@ -117,9 +117,11 @@ mui('#wftmtpsc').on('longtap', 'li', function() {
 				break;
 			case 2:	//删除
 				//删除条目(暂未完成)
-				var wftmtpsc=document.getElementById("wftmtpsc"); 
-				var liArrey=wftmtpsc.getElementsByTagName("li")[0];
-				wftmtpsc.removeChild(liArrey);
+//				var wftmtpsc=document.getElementById("wftmtpsc"); 
+//				var liArrey=wftmtpsc.getElementsByTagName("li")[0];
+//				wftmtpsc.removeChild(liArrey);
+				var lid = document.getElementById(liTextid);
+				lid.innerHTML='';
 				break;
 		}
 	} );
