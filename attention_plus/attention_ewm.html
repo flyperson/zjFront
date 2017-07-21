@@ -164,6 +164,7 @@
 			var qdTime=document.getElementById("qdTime");
 			var qdztXs=document.getElementById("qdztXs");
 			
+			
 			//往页面插值
 			gcidHtml.value=gcid;
 			gcmcHtml.value=gcmc;
@@ -273,6 +274,7 @@
 			//签到按钮点击事件
 			qiand.addEventListener('tap', function() {
 				//签到前验证当前日期是否签到过
+//				alert(gcidHtml.value+"//"+shj.value+"//"+qdTime.value);
 				mui.ajax(url+'attention_plus/attention_ewm.php',{
 					data:{
 						flag:'select',
@@ -290,9 +292,10 @@
 					type:'post',
 					timeout:10000,
 					success:function(data){
-//						alert(data);
+//						alert(data.result);
 						if (data.result=='OK') {
 							alert("您今日已签到过一次,今日内不用再次签到！");
+							qiand.classList.add("my_none");
 							//mui.back();
 							qdztXs.classList.remove("my_none");
 							qdzt.value="已签到";
