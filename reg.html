@@ -56,6 +56,10 @@
 					<input id='password_confirm' type="password" class="mui-input-clear mui-input" placeholder="请确认密码">
 				</div>
 				<div class="mui-input-row">
+					<label>姓名:</label>
+					<input id='ximi' type="text" class="mui-input-clear mui-input" placeholder="请输入姓名">
+				</div>
+				<div class="mui-input-row">
 					<label>手机:</label>
 					<input id='shji' type="number" class="mui-input-clear mui-input" placeholder="请输入号码">
 				</div>
@@ -67,6 +71,20 @@
 					<label>设备:</label>
 					<input id='equipment' type="text"  class="mui-input" value="手机" readonly="readonly" >
 				</div>
+			</form>
+			<form class="mui-input-group" style="margin-top: 5px;">
+				<div class="mui-input-row">						
+					<label>部门:</label>
+					<select id="bmxz" style="color: #ACACB4;">
+						<option value ="请选择您所在的部门" selected="selected">请选择您所在的部门</option>
+					</select>
+				</div>
+				<!--<div class="mui-input-row">						
+					<label>部门:</label>
+					<select id="bmxz">
+						<option value ="" selected="selected"></option>
+					</select>
+				</div>-->
 			</form>
 			<div class="mui-content-padded">
 				<button id='reg' class="mui-btn mui-btn-block mui-btn-primary">注册</button>
@@ -84,10 +102,38 @@
 					var accountBox = doc.getElementById('account');
 					var passwordBox = doc.getElementById('password');
 					var passwordConfirmBox = doc.getElementById('password_confirm');
+					var ximi = doc.getElementById('ximi');
 					var emailBox = doc.getElementById('email');
 					var shji = doc.getElementById('shji');
 					var nameX = doc.getElementById("nameX");
 					var equipment = doc.getElementById("equipment");
+					var bmxz = doc.getElementById("bmxz");
+					
+					//创建部门栏目
+					mui.ajax(url+'reg.php',{
+						data:{
+							my_flag:"get_information"
+						},
+						type:'post',
+						dataType:'json',
+						success:function(data){
+//							alert(data.length);
+							for(i=0;i<data.length;i++){
+								var option=document.createElement('option');
+								option.value=data[i];
+								option.text=data[i];
+								bmxz.appendChild(option);
+							}
+						},
+						error:function(){
+							alert('ajax error!+获取部门失败');
+						}
+					});
+					
+					//选择了改变颜色
+					bmxz.addEventListener('change',function(){
+						bmxz.setAttribute("style","black")
+					});
 					
 					//blur事件是用于注册账号用的
 					accountBox.addEventListener('blur',function(event){
@@ -164,8 +210,9 @@
 							password: passwordBox.value,
 							email: emailBox.value,
 							shji: shji.value,
-							equipment:equipment.value
-							
+							equipment:equipment.value,
+							bmxz:bmxz.value,
+							ximi:ximi.value
 						};
 						var passwordConfirm = passwordConfirmBox.value;
 						if (passwordConfirm != regInfo.password) {

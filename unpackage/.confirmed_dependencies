@@ -698,7 +698,9 @@
 			"setting.html"
 		],
 		"resources": [
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"js/app.js",
+			"js/mui.min.js"
 		]
 	},
 	"my_plus/my_project_zhcx.html": {
@@ -722,7 +724,15 @@
 	},
 	"reg.html": {
 		"resources": [
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"js/app.js",
+			"js/service.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css"
+		],
+		"refer": [
+			"login.html"
 		]
 	},
 	"attention_plus/attention_ewm.html": {

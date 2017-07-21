@@ -173,7 +173,8 @@
 		regInfo.equipment = regInfo.equipment || '';
 		regInfo.fgsxz = regInfo.fgsxz || '';
 		regInfo.nameX = regInfo.nameX || '';
-		//regInfo.bmxz = regInfo.bmxz || '';
+		regInfo.bmxz = regInfo.bmxz || '';
+		regInfo.ximi = regInfo.ximi || '';
 		
 		if (regInfo.account.length < 3) {
 			return callback('用户名最短需要 3 个字符');
@@ -190,19 +191,23 @@
 		
 
 		//注册信息的提交
+//		alert(regInfo.ximi);
 		mui.ajax(url+'reg.php',{
 			data:{
+				my_flag:"save",
 				account:regInfo.account,
 				password:regInfo.password,
 				email:regInfo.email,
 				shji:regInfo.shji,
-				equipment:regInfo.equipment
+				equipment:regInfo.equipment,
+				bmxz:regInfo.bmxz,
+				ximi:regInfo.ximi
 			},
 			dataType:'json',
 			type:'post',
 			timeout:10000,
 			success:function(data){
-				//alert(data.result);
+//				alert(data.sql);
 				if (data.result=='success') {
 					return callback();
 				} else if(data.result=='1'){
